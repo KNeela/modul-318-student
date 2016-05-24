@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwissTransport;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,18 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class frmConnectionsFrom : Form
+    public partial class ShowStations : Form
     {
-        public frmConnectionsFrom()
+        public ShowStations()
         {
             InitializeComponent();
+            
+            //lstStations.Items.Add(new Stations("Matthof", 1));
+        }
+
+        private void btnShowStations_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

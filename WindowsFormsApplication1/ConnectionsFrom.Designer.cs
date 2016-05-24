@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class ConnectionsFrom
+    partial class frmConnectionsFrom
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             this.lblDestination = new System.Windows.Forms.Label();
             this.lblDepartureTime = new System.Windows.Forms.Label();
             this.lstConnectionsDeparture = new System.Windows.Forms.ListBox();
+            this.btnMainWindow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtConnectionsFrom
@@ -77,17 +78,27 @@
             this.lstConnectionsDeparture.Size = new System.Drawing.Size(176, 95);
             this.lstConnectionsDeparture.TabIndex = 4;
             // 
-            // ConnectionsFrom
+            // btnMainWindow
+            // 
+            this.btnMainWindow.Location = new System.Drawing.Point(181, 260);
+            this.btnMainWindow.Name = "btnMainWindow";
+            this.btnMainWindow.Size = new System.Drawing.Size(128, 23);
+            this.btnMainWindow.TabIndex = 5;
+            this.btnMainWindow.Text = "Zurück zum Menü";
+            this.btnMainWindow.UseVisualStyleBackColor = true;
+            // 
+            // frmConnectionsFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 295);
+            this.Controls.Add(this.btnMainWindow);
             this.Controls.Add(this.lstConnectionsDeparture);
             this.Controls.Add(this.lblDepartureTime);
             this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.lblConnectionsFrom);
             this.Controls.Add(this.txtConnectionsFrom);
-            this.Name = "ConnectionsFrom";
+            this.Name = "frmConnectionsFrom";
             this.Text = "Verbindungen ab";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,5 +112,6 @@
         private System.Windows.Forms.Label lblDestination;
         private System.Windows.Forms.Label lblDepartureTime;
         private System.Windows.Forms.ListBox lstConnectionsDeparture;
+        private System.Windows.Forms.Button btnMainWindow;
     }
 }

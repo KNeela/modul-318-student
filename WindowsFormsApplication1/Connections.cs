@@ -18,12 +18,26 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnShowConnections_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Sali Peter!");
             Transport transport = new Transport();
 
             MessageBox.Show(transport.ToString());
+        }
+
+        //AutoComplete-Funktion --> liest Stationen aus StationList
+        public AutoCompleteStringCollection AutoComplete(string station)
+        {
+            var source = new AutoCompleteStringCollection();
+            Transport transport = new Transport();
+
+            var transportList = transport.GetStations(station).StationList;
+            foreach (var transportStation in transportList)
+            {
+                source.Add(transportStation.Name.ToString());
+            }
+            return source;
         }
     }
 }

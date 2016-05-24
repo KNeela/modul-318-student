@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class frmConnectionsFrom : Form
+    public partial class MainWindow : Form
     {
-        public frmConnectionsFrom()
+        public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnConnectionsFromDestination_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnConnectionsFrom_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

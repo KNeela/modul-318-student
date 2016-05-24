@@ -34,6 +34,7 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.lblDestination = new System.Windows.Forms.Label();
             this.txtDestination = new System.Windows.Forms.TextBox();
+            this.btnMainWindow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnShowConnections
@@ -44,7 +45,7 @@
             this.btnShowConnections.TabIndex = 0;
             this.btnShowConnections.Text = "Verbindungen anzeigen";
             this.btnShowConnections.UseVisualStyleBackColor = true;
-            this.btnShowConnections.Click += new System.EventHandler(this.button1_Click);
+            this.btnShowConnections.Click += new System.EventHandler(this.btnShowConnections_Click);
             // 
             // txtFrom
             // 
@@ -86,11 +87,21 @@
             this.txtDestination.Size = new System.Drawing.Size(100, 20);
             this.txtDestination.TabIndex = 5;
             // 
+            // btnMainWindow
+            // 
+            this.btnMainWindow.Location = new System.Drawing.Point(198, 300);
+            this.btnMainWindow.Name = "btnMainWindow";
+            this.btnMainWindow.Size = new System.Drawing.Size(114, 23);
+            this.btnMainWindow.TabIndex = 6;
+            this.btnMainWindow.Text = "Zurück zum Menü";
+            this.btnMainWindow.UseVisualStyleBackColor = true;
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(335, 335);
+            this.Controls.Add(this.btnMainWindow);
             this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.lblFrom);
@@ -112,6 +123,7 @@
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.Label lblDestination;
         private System.Windows.Forms.TextBox txtDestination;
+        private System.Windows.Forms.Button btnMainWindow;
     }
 }
 

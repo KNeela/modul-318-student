@@ -34,7 +34,7 @@
             // 
             // btnConnectionsFromDestination
             // 
-            this.btnConnectionsFromDestination.Location = new System.Drawing.Point(68, 44);
+            this.btnConnectionsFromDestination.Location = new System.Drawing.Point(68, 58);
             this.btnConnectionsFromDestination.Name = "btnConnectionsFromDestination";
             this.btnConnectionsFromDestination.Size = new System.Drawing.Size(169, 37);
             this.btnConnectionsFromDestination.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // btnConnectionsFrom
             // 
-            this.btnConnectionsFrom.Location = new System.Drawing.Point(68, 122);
+            this.btnConnectionsFrom.Location = new System.Drawing.Point(68, 153);
             this.btnConnectionsFrom.Name = "btnConnectionsFrom";
             this.btnConnectionsFrom.Size = new System.Drawing.Size(169, 39);
             this.btnConnectionsFrom.TabIndex = 1;

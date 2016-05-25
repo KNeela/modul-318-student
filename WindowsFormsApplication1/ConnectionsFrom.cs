@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        //--------A004--------
         //AutoComplete-Funktion --> liest Stationen aus StationList
         private AutoCompleteStringCollection AutoComplete(string station)
         {
@@ -32,6 +33,7 @@ namespace WindowsFormsApplication1
             return source;
         }
 
+        //--------A004--------
         //AutoComplete bei einer Eingabe ab 4 Zeichen werden Stationen angezeigt
         private void StartStation_KeyUp(object sender, KeyEventArgs e)
         {
@@ -44,7 +46,8 @@ namespace WindowsFormsApplication1
             }
         }
 
-
+        //--------A003--------
+        //Abfahrten ab eingegebener Station werden in DataGrid angezeigt
         private void btnShowDepartures_Click(object sender, EventArgs e)
         {
             string fromStation = txtConnectionsFrom.Text.ToString();
@@ -60,11 +63,11 @@ namespace WindowsFormsApplication1
             //dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
 
             var stationboard = transport.GetStationBoard(fromStation, transport.GetStations(fromStation).StationList[0].Id).Entries;
-            foreach (var connectionFrom in stationboard)
+            foreach (var connectionsFrom in stationboard)
             {
-                dt.Rows.Add(connectionFrom.To,
-                    connectionFrom.Name,
-                    connectionFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
+                dt.Rows.Add(connectionsFrom.To,
+                    connectionsFrom.Name,
+                    connectionsFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
                     );
 
             }

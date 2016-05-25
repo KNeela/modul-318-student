@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwissTransportTimeTable;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,6 +28,12 @@ namespace WindowsFormsApplication1
         {
             frmConnectionsFrom ConnectionsFromForm = new frmConnectionsFrom();
             ConnectionsFromForm.ShowDialog();
+        }
+
+        private void btnSearchStation_Click(object sender, EventArgs e)
+        {
+            frmSearchStation SearchStationForm = new frmSearchStation();
+            SearchStationForm.ShowDialog();
         }
     }
 }

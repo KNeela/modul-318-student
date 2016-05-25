@@ -18,7 +18,22 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        //--------A001--------
+        //Validation: Prüfen ob eingegebene Station existiert.
+        public void ValidateInput(string station)
+        {
+            var source = new AutoCompleteStringCollection();
+            Transport transport = new Transport();
 
+            var transportList = transport.GetStations(station).StationList;
+
+            if (station != transportList.ToString())
+            {
+                MessageBox.Show("Die eingegebene Station existiert nicht.");
+            }
+        }
+
+        //--------A004--------
         //AutoComplete-Funktion --> liest Stationen aus StationList
         public AutoCompleteStringCollection AutoComplete(string station)
         {
@@ -33,6 +48,7 @@ namespace WindowsFormsApplication1
             return source;
         }
 
+        //--------A004--------
         //AutoComplete bei einer Eingabe ab 4 Zeichen bei Start- und Endstation
         private void StartStation_KeyUp(object sender, KeyEventArgs e)
         {
@@ -56,12 +72,15 @@ namespace WindowsFormsApplication1
             }
         }
 
+        //--------A002--------
         //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
         private void btnShowConnections_Click(object sender, EventArgs e)
         {
             string fromStation = txtStart.Text.ToString();
             string toStation = txtDestination.Text.ToString();
 
+            ValidateInput(fromStation);         //Prüfen ob eingegebene Station existiert
+            ValidateInput(toStation);
 
             Transport transport = new Transport();
 
@@ -85,7 +104,6 @@ namespace WindowsFormsApplication1
             }
 
             dataGridConnections.RowTemplate.Height = 30;
-            //dataGridConnections.AutoSizeColumnsMode =  DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridConnections.DataSource = dt;
 

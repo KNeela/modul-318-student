@@ -102,10 +102,6 @@ namespace WindowsFormsApplication1
 
 
 
-
-
-
-
             ValidateInput(fromStation);         //Prüfen ob eingegebene Station existiert
             ValidateInput(toStation);
 

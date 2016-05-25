@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class MainWindow
+    partial class frmMainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -52,14 +52,14 @@
             this.btnConnectionsFrom.UseVisualStyleBackColor = true;
             this.btnConnectionsFrom.Click += new System.EventHandler(this.btnConnectionsFrom_Click);
             // 
-            // MainWindow
+            // frmMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
             this.Controls.Add(this.btnConnectionsFrom);
             this.Controls.Add(this.btnConnectionsFromDestination);
-            this.Name = "MainWindow";
+            this.Name = "frmMainWindow";
             this.Text = "MainWindow";
             this.ResumeLayout(false);
 

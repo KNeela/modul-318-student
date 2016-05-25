@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class MainWindow : Form
+    public partial class frmMainWindow : Form
     {
-        public MainWindow()
+        public frmMainWindow()
         {
             InitializeComponent();
         }
 
         private void btnConnectionsFromDestination_Click(object sender, EventArgs e)
         {
-            
+            frmConnections ConnectionsForm = new frmConnections();
+            ConnectionsForm.ShowDialog();
         }
 
         private void btnConnectionsFrom_Click(object sender, EventArgs e)
         {
-            
+            frmConnectionsFrom ConnectionsFromForm = new frmConnectionsFrom();
+            ConnectionsFromForm.ShowDialog();
         }
     }
 }

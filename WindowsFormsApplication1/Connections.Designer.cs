@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnShowConnections = new System.Windows.Forms.Button();
-            this.txtFrom = new System.Windows.Forms.TextBox();
+            this.txtStart = new System.Windows.Forms.TextBox();
             this.lstConnections = new System.Windows.Forms.ListBox();
             this.lblFrom = new System.Windows.Forms.Label();
             this.lblDestination = new System.Windows.Forms.Label();
@@ -47,12 +47,13 @@
             this.btnShowConnections.UseVisualStyleBackColor = true;
             this.btnShowConnections.Click += new System.EventHandler(this.btnShowConnections_Click);
             // 
-            // txtFrom
+            // txtStart
             // 
-            this.txtFrom.Location = new System.Drawing.Point(128, 25);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(100, 20);
-            this.txtFrom.TabIndex = 1;
+            this.txtStart.Location = new System.Drawing.Point(128, 25);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(100, 20);
+            this.txtStart.TabIndex = 1;
+            this.txtStart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartStation_KeyUp);
             // 
             // lstConnections
             // 
@@ -86,6 +87,7 @@
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(100, 20);
             this.txtDestination.TabIndex = 5;
+            this.txtDestination.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EndStation_KeyUp);
             // 
             // btnMainWindow
             // 
@@ -106,7 +108,7 @@
             this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.lstConnections);
-            this.Controls.Add(this.txtFrom);
+            this.Controls.Add(this.txtStart);
             this.Controls.Add(this.btnShowConnections);
             this.Name = "frmConnections";
             this.Text = "Verbindungen Von - Nach";
@@ -118,7 +120,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnShowConnections;
-        private System.Windows.Forms.TextBox txtFrom;
+        private System.Windows.Forms.TextBox txtStart;
         private System.Windows.Forms.ListBox lstConnections;
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.Label lblDestination;

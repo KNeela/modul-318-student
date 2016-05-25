@@ -66,24 +66,28 @@ namespace WindowsFormsApplication1
             Transport transport = new Transport();
 
             DataTable dt = new DataTable();
-            dt.AcceptChanges();
-            dt.Columns.Add(new DataColumn("Von", typeof(string)));
-            dt.Columns.Add(new DataColumn("Gleis", typeof(string)));
-            dt.Columns.Add(new DataColumn("Abfahrt", typeof(string)));
-            dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
+            this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
+            dt.Columns.Add(new DataColumn("Abfahrt Gleis" + Environment.NewLine + "Ankunft Gleis"));
+            dt.Columns.Add(new DataColumn("Abfahrtszeit" + Environment.NewLine + "Ankunftszeit"));
 
+            //dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
 
             var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
             foreach (var connection in connections)
             {
-                dt.Rows.Add(connection.From.Station.Name, 
+                dt.Rows.Add(connection.From.Station.Name + Environment.NewLine + 
+                    connection.To.Station.Name,
+                    connection.From.Platform + Environment.NewLine +
                     connection.To.Platform, 
-                    Convert.ToDateTime(connection.From.Departure).ToShortTimeString(), 
+                    Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine + 
                     Convert.ToDateTime(connection.To.Arrival).ToShortTimeString());
             }
-            
+
+            dataGridConnections.RowTemplate.Height = 30;
+            //dataGridConnections.AutoSizeColumnsMode =  DataGridViewAutoSizeColumnsMode.AllCells;
+
             dataGridConnections.DataSource = dt;
-            //dt.RejectChanges();
 
         }
 

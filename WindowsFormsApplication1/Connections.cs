@@ -18,15 +18,6 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private void btnShowConnections_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Sali Peter!");
-            Transport transport = new Transport();
-
-            MessageBox.Show(transport.ToString());
-        }
-
-
 
         //AutoComplete-Funktion --> liest Stationen aus StationList
         public AutoCompleteStringCollection AutoComplete(string station)
@@ -46,23 +37,41 @@ namespace WindowsFormsApplication1
         private void StartStation_KeyUp(object sender, KeyEventArgs e)
         {
             string start = txtStart.Text;
-            if (start.Length >= 3)
+            if (start.Length == 3)
             {
-                txtStart.AutoCompleteCustomSource = AutoComplete(start);
                 txtStart.AutoCompleteMode = AutoCompleteMode.Suggest;
                 txtStart.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtStart.AutoCompleteCustomSource = AutoComplete(start);
             }
         }
 
         private void EndStation_KeyUp(object sender, KeyEventArgs e)
         {
             string destination = txtDestination.Text;
-            if (destination.Length >= 3)
+            if (destination.Length == 3)
             {
-                txtStart.AutoCompleteCustomSource = AutoComplete(destination);
-                txtStart.AutoCompleteMode = AutoCompleteMode.Suggest;
-                txtStart.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtDestination.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtDestination.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtDestination.AutoCompleteCustomSource = AutoComplete(destination);
             }
+        }
+
+        //Verbindungen zwischen Start- und Endstation in Listbox ausgeben
+        private void btnShowConnections_Click(object sender, EventArgs e)
+        {
+            string fromStation = txtStart.Text.ToString();
+            string toStation = txtDestination.Text.ToString();
+
+
+            Transport transport = new Transport();
+            var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
+            foreach (var connection in connections)
+            {
+                lstConnections.Items.Add(connection.From.Station.Name + "       " 
+                + Convert.ToDateTime(connection.From.Departure) + "     " 
+                + connection.From.Platform);
+            }
+            
         }
     }
 }

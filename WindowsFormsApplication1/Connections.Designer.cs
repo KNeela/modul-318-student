@@ -35,6 +35,9 @@
             this.lblDestination = new System.Windows.Forms.Label();
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.btnMainWindow = new System.Windows.Forms.Button();
+            this.lblFromStation = new System.Windows.Forms.Label();
+            this.lblDeparture = new System.Windows.Forms.Label();
+            this.lblPlatform = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnShowConnections
@@ -49,18 +52,19 @@
             // 
             // txtStart
             // 
+            this.txtStart.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtStart.Location = new System.Drawing.Point(128, 25);
             this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(100, 20);
+            this.txtStart.Size = new System.Drawing.Size(300, 20);
             this.txtStart.TabIndex = 1;
             this.txtStart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartStation_KeyUp);
             // 
             // lstConnections
             // 
             this.lstConnections.FormattingEnabled = true;
-            this.lstConnections.Location = new System.Drawing.Point(53, 183);
+            this.lstConnections.Location = new System.Drawing.Point(53, 211);
             this.lstConnections.Name = "lstConnections";
-            this.lstConnections.Size = new System.Drawing.Size(120, 95);
+            this.lstConnections.Size = new System.Drawing.Size(375, 95);
             this.lstConnections.TabIndex = 2;
             // 
             // lblFrom
@@ -85,24 +89,54 @@
             // 
             this.txtDestination.Location = new System.Drawing.Point(128, 64);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(100, 20);
+            this.txtDestination.Size = new System.Drawing.Size(300, 20);
             this.txtDestination.TabIndex = 5;
             this.txtDestination.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EndStation_KeyUp);
             // 
             // btnMainWindow
             // 
-            this.btnMainWindow.Location = new System.Drawing.Point(198, 300);
+            this.btnMainWindow.Location = new System.Drawing.Point(200, 324);
             this.btnMainWindow.Name = "btnMainWindow";
             this.btnMainWindow.Size = new System.Drawing.Size(114, 23);
             this.btnMainWindow.TabIndex = 6;
             this.btnMainWindow.Text = "Zurück zum Menü";
             this.btnMainWindow.UseVisualStyleBackColor = true;
             // 
+            // lblFromStation
+            // 
+            this.lblFromStation.AutoSize = true;
+            this.lblFromStation.Location = new System.Drawing.Point(53, 191);
+            this.lblFromStation.Name = "lblFromStation";
+            this.lblFromStation.Size = new System.Drawing.Size(20, 13);
+            this.lblFromStation.TabIndex = 7;
+            this.lblFromStation.Text = "Ab";
+            // 
+            // lblDeparture
+            // 
+            this.lblDeparture.AutoSize = true;
+            this.lblDeparture.Location = new System.Drawing.Point(165, 191);
+            this.lblDeparture.Name = "lblDeparture";
+            this.lblDeparture.Size = new System.Drawing.Size(41, 13);
+            this.lblDeparture.TabIndex = 8;
+            this.lblDeparture.Text = "Abfahrt";
+            // 
+            // lblPlatform
+            // 
+            this.lblPlatform.AutoSize = true;
+            this.lblPlatform.Location = new System.Drawing.Point(320, 191);
+            this.lblPlatform.Name = "lblPlatform";
+            this.lblPlatform.Size = new System.Drawing.Size(30, 13);
+            this.lblPlatform.TabIndex = 9;
+            this.lblPlatform.Text = "Gleis";
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 335);
+            this.ClientSize = new System.Drawing.Size(660, 368);
+            this.Controls.Add(this.lblPlatform);
+            this.Controls.Add(this.lblDeparture);
+            this.Controls.Add(this.lblFromStation);
             this.Controls.Add(this.btnMainWindow);
             this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.lblDestination);
@@ -126,6 +160,9 @@
         private System.Windows.Forms.Label lblDestination;
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.Button btnMainWindow;
+        private System.Windows.Forms.Label lblFromStation;
+        private System.Windows.Forms.Label lblDeparture;
+        private System.Windows.Forms.Label lblPlatform;
     }
 }
 

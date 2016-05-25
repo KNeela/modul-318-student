@@ -68,8 +68,8 @@ namespace WindowsFormsApplication1
             DataTable dt = new DataTable();
             this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
-            dt.Columns.Add(new DataColumn("Abfahrt Gleis" + Environment.NewLine + "Ankunft Gleis"));
-            dt.Columns.Add(new DataColumn("Abfahrtszeit" + Environment.NewLine + "Ankunftszeit"));
+            dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
+            dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
 
             //dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
 

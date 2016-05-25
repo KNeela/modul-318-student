@@ -30,11 +30,10 @@
         {
             this.txtConnectionsFrom = new System.Windows.Forms.TextBox();
             this.lblConnectionsFrom = new System.Windows.Forms.Label();
-            this.lblDestination = new System.Windows.Forms.Label();
-            this.lblDepartureTime = new System.Windows.Forms.Label();
-            this.lstConnectionsDeparture = new System.Windows.Forms.ListBox();
             this.btnMainWindow = new System.Windows.Forms.Button();
             this.btnShowDepartures = new System.Windows.Forms.Button();
+            this.dataGridConnectionsFrom = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConnectionsFrom)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConnectionsFrom
@@ -53,32 +52,6 @@
             this.lblConnectionsFrom.Size = new System.Drawing.Size(88, 13);
             this.lblConnectionsFrom.TabIndex = 1;
             this.lblConnectionsFrom.Text = "Verbindungen ab";
-            // 
-            // lblDestination
-            // 
-            this.lblDestination.AutoSize = true;
-            this.lblDestination.Location = new System.Drawing.Point(50, 148);
-            this.lblDestination.Name = "lblDestination";
-            this.lblDestination.Size = new System.Drawing.Size(33, 13);
-            this.lblDestination.TabIndex = 2;
-            this.lblDestination.Text = "Nach";
-            // 
-            // lblDepartureTime
-            // 
-            this.lblDepartureTime.AutoSize = true;
-            this.lblDepartureTime.Location = new System.Drawing.Point(166, 148);
-            this.lblDepartureTime.Name = "lblDepartureTime";
-            this.lblDepartureTime.Size = new System.Drawing.Size(41, 13);
-            this.lblDepartureTime.TabIndex = 3;
-            this.lblDepartureTime.Text = "Abfahrt";
-            // 
-            // lstConnectionsDeparture
-            // 
-            this.lstConnectionsDeparture.FormattingEnabled = true;
-            this.lstConnectionsDeparture.Location = new System.Drawing.Point(53, 174);
-            this.lstConnectionsDeparture.Name = "lstConnectionsDeparture";
-            this.lstConnectionsDeparture.Size = new System.Drawing.Size(375, 95);
-            this.lstConnectionsDeparture.TabIndex = 4;
             // 
             // btnMainWindow
             // 
@@ -99,20 +72,28 @@
             this.btnShowDepartures.UseVisualStyleBackColor = true;
             this.btnShowDepartures.Click += new System.EventHandler(this.btnShowDepartures_Click);
             // 
+            // dataGridConnectionsFrom
+            // 
+            this.dataGridConnectionsFrom.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridConnectionsFrom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridConnectionsFrom.Location = new System.Drawing.Point(37, 125);
+            this.dataGridConnectionsFrom.Name = "dataGridConnectionsFrom";
+            this.dataGridConnectionsFrom.Size = new System.Drawing.Size(327, 150);
+            this.dataGridConnectionsFrom.TabIndex = 7;
+            // 
             // frmConnectionsFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 331);
+            this.Controls.Add(this.dataGridConnectionsFrom);
             this.Controls.Add(this.btnShowDepartures);
             this.Controls.Add(this.btnMainWindow);
-            this.Controls.Add(this.lstConnectionsDeparture);
-            this.Controls.Add(this.lblDepartureTime);
-            this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.lblConnectionsFrom);
             this.Controls.Add(this.txtConnectionsFrom);
             this.Name = "frmConnectionsFrom";
             this.Text = "Verbindungen ab";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConnectionsFrom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,10 +103,8 @@
 
         private System.Windows.Forms.TextBox txtConnectionsFrom;
         private System.Windows.Forms.Label lblConnectionsFrom;
-        private System.Windows.Forms.Label lblDestination;
-        private System.Windows.Forms.Label lblDepartureTime;
-        private System.Windows.Forms.ListBox lstConnectionsDeparture;
         private System.Windows.Forms.Button btnMainWindow;
         private System.Windows.Forms.Button btnShowDepartures;
+        private System.Windows.Forms.DataGridView dataGridConnectionsFrom;
     }
 }

@@ -47,7 +47,32 @@ namespace WindowsFormsApplication1
 
         private void btnShowDepartures_Click(object sender, EventArgs e)
         {
+            string fromStation = txtConnectionsFrom.Text.ToString();
+            
+            Transport transport = new Transport();
 
+            DataTable dt = new DataTable();
+            this.dataGridConnectionsFrom.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dt.Columns.Add(new DataColumn("Nach"));
+            dt.Columns.Add(new DataColumn("Linie"));
+            dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
+
+            //dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
+
+            var stationboard = transport.GetStationBoard(fromStation, transport.GetStations(fromStation).StationList[0].Id).Entries;
+            foreach (var connectionFrom in stationboard)
+            {
+                dt.Rows.Add(connectionFrom.To,
+                    connectionFrom.Name,
+                    connectionFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
+                    );
+
+            }
+
+            dataGridConnectionsFrom.RowTemplate.Height = 30;
+            dataGridConnectionsFrom.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dataGridConnectionsFrom.DataSource = dt;
         }
     }
 }

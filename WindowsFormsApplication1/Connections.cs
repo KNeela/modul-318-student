@@ -25,6 +25,8 @@ namespace WindowsFormsApplication1
             var source = new AutoCompleteStringCollection();
             Transport transport = new Transport();
 
+            
+
             var transportList = transport.GetStations(station).StationList;
 
             if (station != transportList.ToString())
@@ -79,10 +81,34 @@ namespace WindowsFormsApplication1
             string fromStation = txtStart.Text.ToString();
             string toStation = txtDestination.Text.ToString();
 
+            bool isValid = true;
+
+            var source = new AutoCompleteStringCollection();
+            Transport transport = new Transport();
+
+
+            var fromtransportList = transport.GetStations(fromStation).StationList;
+            if (fromStation != fromtransportList.ToString())
+            {
+                MessageBox.Show("Die Startstation existiert nicht.");
+                isValid = false;
+            }
+
+            var totransportList = transport.GetStations(toStation).StationList;
+            if(toStation != totransportList.ToString())
+            {
+                MessageBox.Show("Die eingegebene Endstation existiert nicht.");
+            }
+
+
+
+
+
+
+
             ValidateInput(fromStation);         //Prüfen ob eingegebene Station existiert
             ValidateInput(toStation);
 
-            Transport transport = new Transport();
 
             DataTable dt = new DataTable();
             this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;

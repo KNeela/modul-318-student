@@ -29,11 +29,5 @@ namespace WindowsFormsApplication1
             frmConnectionsFrom ConnectionsFromForm = new frmConnectionsFrom();
             ConnectionsFromForm.ShowDialog();
         }
-
-        private void btnSearchStation_Click(object sender, EventArgs e)
-        {
-            frmSearchStation SearchStationForm = new frmSearchStation();
-            SearchStationForm.ShowDialog();
-        }
     }
 }

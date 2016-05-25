@@ -30,14 +30,12 @@
         {
             this.btnShowConnections = new System.Windows.Forms.Button();
             this.txtStart = new System.Windows.Forms.TextBox();
-            this.lstConnections = new System.Windows.Forms.ListBox();
             this.lblFrom = new System.Windows.Forms.Label();
             this.lblDestination = new System.Windows.Forms.Label();
             this.txtDestination = new System.Windows.Forms.TextBox();
-            this.btnMainWindow = new System.Windows.Forms.Button();
-            this.lblFromStation = new System.Windows.Forms.Label();
-            this.lblDeparture = new System.Windows.Forms.Label();
-            this.lblPlatform = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.dataGridConnections = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
             this.SuspendLayout();
             // 
             // btnShowConnections
@@ -58,14 +56,6 @@
             this.txtStart.Size = new System.Drawing.Size(300, 20);
             this.txtStart.TabIndex = 1;
             this.txtStart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartStation_KeyUp);
-            // 
-            // lstConnections
-            // 
-            this.lstConnections.FormattingEnabled = true;
-            this.lstConnections.Location = new System.Drawing.Point(53, 211);
-            this.lstConnections.Name = "lstConnections";
-            this.lstConnections.Size = new System.Drawing.Size(375, 95);
-            this.lstConnections.TabIndex = 2;
             // 
             // lblFrom
             // 
@@ -93,59 +83,39 @@
             this.txtDestination.TabIndex = 5;
             this.txtDestination.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EndStation_KeyUp);
             // 
-            // btnMainWindow
+            // btnClose
             // 
-            this.btnMainWindow.Location = new System.Drawing.Point(200, 324);
-            this.btnMainWindow.Name = "btnMainWindow";
-            this.btnMainWindow.Size = new System.Drawing.Size(114, 23);
-            this.btnMainWindow.TabIndex = 6;
-            this.btnMainWindow.Text = "Zurück zum Menü";
-            this.btnMainWindow.UseVisualStyleBackColor = true;
+            this.btnClose.Location = new System.Drawing.Point(414, 333);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(114, 23);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Schliessen";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblFromStation
+            // dataGridConnections
             // 
-            this.lblFromStation.AutoSize = true;
-            this.lblFromStation.Location = new System.Drawing.Point(53, 191);
-            this.lblFromStation.Name = "lblFromStation";
-            this.lblFromStation.Size = new System.Drawing.Size(20, 13);
-            this.lblFromStation.TabIndex = 7;
-            this.lblFromStation.Text = "Ab";
-            // 
-            // lblDeparture
-            // 
-            this.lblDeparture.AutoSize = true;
-            this.lblDeparture.Location = new System.Drawing.Point(165, 191);
-            this.lblDeparture.Name = "lblDeparture";
-            this.lblDeparture.Size = new System.Drawing.Size(41, 13);
-            this.lblDeparture.TabIndex = 8;
-            this.lblDeparture.Text = "Abfahrt";
-            // 
-            // lblPlatform
-            // 
-            this.lblPlatform.AutoSize = true;
-            this.lblPlatform.Location = new System.Drawing.Point(320, 191);
-            this.lblPlatform.Name = "lblPlatform";
-            this.lblPlatform.Size = new System.Drawing.Size(30, 13);
-            this.lblPlatform.TabIndex = 9;
-            this.lblPlatform.Text = "Gleis";
+            this.dataGridConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridConnections.Location = new System.Drawing.Point(53, 169);
+            this.dataGridConnections.Name = "dataGridConnections";
+            this.dataGridConnections.Size = new System.Drawing.Size(433, 133);
+            this.dataGridConnections.TabIndex = 11;
             // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 368);
-            this.Controls.Add(this.lblPlatform);
-            this.Controls.Add(this.lblDeparture);
-            this.Controls.Add(this.lblFromStation);
-            this.Controls.Add(this.btnMainWindow);
+            this.ClientSize = new System.Drawing.Size(549, 368);
+            this.Controls.Add(this.dataGridConnections);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtDestination);
             this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.lblFrom);
-            this.Controls.Add(this.lstConnections);
             this.Controls.Add(this.txtStart);
             this.Controls.Add(this.btnShowConnections);
             this.Name = "frmConnections";
             this.Text = "Verbindungen Von - Nach";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,14 +125,11 @@
 
         private System.Windows.Forms.Button btnShowConnections;
         private System.Windows.Forms.TextBox txtStart;
-        private System.Windows.Forms.ListBox lstConnections;
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.Label lblDestination;
         private System.Windows.Forms.TextBox txtDestination;
-        private System.Windows.Forms.Button btnMainWindow;
-        private System.Windows.Forms.Label lblFromStation;
-        private System.Windows.Forms.Label lblDeparture;
-        private System.Windows.Forms.Label lblPlatform;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.DataGridView dataGridConnections;
     }
 }
 

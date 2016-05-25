@@ -34,19 +34,21 @@
             this.lblDepartureTime = new System.Windows.Forms.Label();
             this.lstConnectionsDeparture = new System.Windows.Forms.ListBox();
             this.btnMainWindow = new System.Windows.Forms.Button();
+            this.btnShowDepartures = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtConnectionsFrom
             // 
-            this.txtConnectionsFrom.Location = new System.Drawing.Point(169, 46);
+            this.txtConnectionsFrom.Location = new System.Drawing.Point(128, 25);
             this.txtConnectionsFrom.Name = "txtConnectionsFrom";
-            this.txtConnectionsFrom.Size = new System.Drawing.Size(100, 20);
+            this.txtConnectionsFrom.Size = new System.Drawing.Size(174, 20);
             this.txtConnectionsFrom.TabIndex = 0;
+            this.txtConnectionsFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartStation_KeyUp);
             // 
             // lblConnectionsFrom
             // 
             this.lblConnectionsFrom.AutoSize = true;
-            this.lblConnectionsFrom.Location = new System.Drawing.Point(28, 52);
+            this.lblConnectionsFrom.Location = new System.Drawing.Point(34, 28);
             this.lblConnectionsFrom.Name = "lblConnectionsFrom";
             this.lblConnectionsFrom.Size = new System.Drawing.Size(88, 13);
             this.lblConnectionsFrom.TabIndex = 1;
@@ -55,7 +57,7 @@
             // lblDestination
             // 
             this.lblDestination.AutoSize = true;
-            this.lblDestination.Location = new System.Drawing.Point(28, 101);
+            this.lblDestination.Location = new System.Drawing.Point(50, 148);
             this.lblDestination.Name = "lblDestination";
             this.lblDestination.Size = new System.Drawing.Size(33, 13);
             this.lblDestination.TabIndex = 2;
@@ -64,7 +66,7 @@
             // lblDepartureTime
             // 
             this.lblDepartureTime.AutoSize = true;
-            this.lblDepartureTime.Location = new System.Drawing.Point(166, 101);
+            this.lblDepartureTime.Location = new System.Drawing.Point(166, 148);
             this.lblDepartureTime.Name = "lblDepartureTime";
             this.lblDepartureTime.Size = new System.Drawing.Size(41, 13);
             this.lblDepartureTime.TabIndex = 3;
@@ -73,25 +75,36 @@
             // lstConnectionsDeparture
             // 
             this.lstConnectionsDeparture.FormattingEnabled = true;
-            this.lstConnectionsDeparture.Location = new System.Drawing.Point(31, 131);
+            this.lstConnectionsDeparture.Location = new System.Drawing.Point(53, 174);
             this.lstConnectionsDeparture.Name = "lstConnectionsDeparture";
-            this.lstConnectionsDeparture.Size = new System.Drawing.Size(176, 95);
+            this.lstConnectionsDeparture.Size = new System.Drawing.Size(375, 95);
             this.lstConnectionsDeparture.TabIndex = 4;
             // 
             // btnMainWindow
             // 
-            this.btnMainWindow.Location = new System.Drawing.Point(181, 260);
+            this.btnMainWindow.Location = new System.Drawing.Point(409, 290);
             this.btnMainWindow.Name = "btnMainWindow";
             this.btnMainWindow.Size = new System.Drawing.Size(128, 23);
             this.btnMainWindow.TabIndex = 5;
             this.btnMainWindow.Text = "Zurück zum Menü";
             this.btnMainWindow.UseVisualStyleBackColor = true;
             // 
+            // btnShowDepartures
+            // 
+            this.btnShowDepartures.Location = new System.Drawing.Point(128, 85);
+            this.btnShowDepartures.Name = "btnShowDepartures";
+            this.btnShowDepartures.Size = new System.Drawing.Size(114, 23);
+            this.btnShowDepartures.TabIndex = 6;
+            this.btnShowDepartures.Text = "Abfahrten anzeigen";
+            this.btnShowDepartures.UseVisualStyleBackColor = true;
+            this.btnShowDepartures.Click += new System.EventHandler(this.btnShowDepartures_Click);
+            // 
             // frmConnectionsFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 295);
+            this.ClientSize = new System.Drawing.Size(549, 331);
+            this.Controls.Add(this.btnShowDepartures);
             this.Controls.Add(this.btnMainWindow);
             this.Controls.Add(this.lstConnectionsDeparture);
             this.Controls.Add(this.lblDepartureTime);
@@ -113,5 +126,6 @@
         private System.Windows.Forms.Label lblDepartureTime;
         private System.Windows.Forms.ListBox lstConnectionsDeparture;
         private System.Windows.Forms.Button btnMainWindow;
+        private System.Windows.Forms.Button btnShowDepartures;
     }
 }

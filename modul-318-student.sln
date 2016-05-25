@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransport", "src\Swiss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportTest", "tests\SwissTransportTest\SwissTransportTest.csproj", "{959C6E54-5B1C-40F5-938A-C57B17451421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportForms", "WindowsFormsApplication1\SwissTransportForms.csproj", "{F164ECC0-EA03-46B8-BA37-EE61741C9FF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportTimeTable", "WindowsFormsApplication1\SwissTransportTimeTable.csproj", "{F164ECC0-EA03-46B8-BA37-EE61741C9FF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

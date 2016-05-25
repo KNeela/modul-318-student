@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
             return source;
         }
 
-        //AutoComplete bei einer Eingabe ab 3 Zeichen bei Start- und Endstation
+        //AutoComplete bei einer Eingabe ab 4 Zeichen bei Start- und Endstation
         private void StartStation_KeyUp(object sender, KeyEventArgs e)
         {
             string start = txtStart.Text;
@@ -56,7 +56,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        //Verbindungen zwischen Start- und Endstation in Listbox ausgeben
+        //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
         private void btnShowConnections_Click(object sender, EventArgs e)
         {
             string fromStation = txtStart.Text.ToString();
@@ -64,14 +64,33 @@ namespace WindowsFormsApplication1
 
 
             Transport transport = new Transport();
+
+            DataTable dt = new DataTable();
+            dt.AcceptChanges();
+            dt.Columns.Add(new DataColumn("Von", typeof(string)));
+            dt.Columns.Add(new DataColumn("Gleis", typeof(string)));
+            dt.Columns.Add(new DataColumn("Abfahrt", typeof(string)));
+            dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
+
+
             var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
             foreach (var connection in connections)
             {
-                lstConnections.Items.Add(connection.From.Station.Name + "       " 
-                + Convert.ToDateTime(connection.From.Departure) + "     " 
-                + connection.From.Platform);
+                dt.Rows.Add(connection.From.Station.Name, 
+                    connection.To.Platform, 
+                    Convert.ToDateTime(connection.From.Departure).ToShortTimeString(), 
+                    Convert.ToDateTime(connection.To.Arrival).ToShortTimeString());
             }
             
+            dataGridConnections.DataSource = dt;
+            //dt.RejectChanges();
+
+        }
+
+        //Fenster per Schliessen-Button schliessen
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

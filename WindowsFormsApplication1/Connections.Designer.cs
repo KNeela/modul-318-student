@@ -41,13 +41,17 @@
             this.lblTitel = new System.Windows.Forms.Label();
             this.btnMapsFrom = new System.Windows.Forms.Button();
             this.btnMapsTo = new System.Windows.Forms.Button();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpTime = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
             this.SuspendLayout();
             // 
             // btnShowConnections
             // 
             this.btnShowConnections.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnShowConnections.Location = new System.Drawing.Point(206, 132);
+            this.btnShowConnections.Location = new System.Drawing.Point(205, 221);
             this.btnShowConnections.Name = "btnShowConnections";
             this.btnShowConnections.Size = new System.Drawing.Size(140, 23);
             this.btnShowConnections.TabIndex = 3;
@@ -58,7 +62,7 @@
             // txtStart
             // 
             this.txtStart.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtStart.Location = new System.Drawing.Point(266, 28);
+            this.txtStart.Location = new System.Drawing.Point(266, 27);
             this.txtStart.Name = "txtStart";
             this.txtStart.Size = new System.Drawing.Size(300, 20);
             this.txtStart.TabIndex = 1;
@@ -95,7 +99,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnClose.Location = new System.Drawing.Point(566, 335);
+            this.btnClose.Location = new System.Drawing.Point(595, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(114, 23);
             this.btnClose.TabIndex = 6;
@@ -112,10 +116,10 @@
             this.dataGridConnections.BackgroundColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.dataGridConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConnections.Location = new System.Drawing.Point(206, 171);
+            this.dataGridConnections.Location = new System.Drawing.Point(205, 267);
             this.dataGridConnections.Name = "dataGridConnections";
             this.dataGridConnections.ReadOnly = true;
-            this.dataGridConnections.Size = new System.Drawing.Size(360, 158);
+            this.dataGridConnections.Size = new System.Drawing.Size(372, 167);
             this.dataGridConnections.TabIndex = 11;
             // 
             // lblSeparator
@@ -185,12 +189,54 @@
             this.btnMapsTo.UseVisualStyleBackColor = false;
             this.btnMapsTo.Click += new System.EventHandler(this.btnMapsTo_Click);
             // 
+            // dtpDate
+            // 
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDate.Location = new System.Drawing.Point(266, 137);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(79, 20);
+            this.dtpDate.TabIndex = 20;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(202, 141);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(50, 16);
+            this.lblDate.TabIndex = 21;
+            this.lblDate.Text = "Datum:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(202, 180);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 16);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Zeit:";
+            // 
+            // dtpTime
+            // 
+            this.dtpTime.CustomFormat = "HH:mm";
+            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpTime.Location = new System.Drawing.Point(266, 176);
+            this.dtpTime.Name = "dtpTime";
+            this.dtpTime.ShowUpDown = true;
+            this.dtpTime.Size = new System.Drawing.Size(79, 20);
+            this.dtpTime.TabIndex = 23;
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(740, 368);
+            this.ClientSize = new System.Drawing.Size(740, 484);
+            this.Controls.Add(this.dtpTime);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.btnMapsTo);
             this.Controls.Add(this.btnMapsFrom);
             this.Controls.Add(this.lblTitel);
@@ -227,6 +273,10 @@
         private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.Button btnMapsFrom;
         private System.Windows.Forms.Button btnMapsTo;
+        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dtpTime;
     }
 }
 

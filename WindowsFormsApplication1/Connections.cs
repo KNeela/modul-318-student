@@ -33,39 +33,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-        //Validation: Prüfen ob eingebene Start- und Endstation (bei Verbindungen Von-Nach) existiert.
-        //public void ValidateInputStartToStation(string fromstation, string tostation)
-        //{
-        //    var source = new AutoCompleteStringCollection();
-        //    Transport transport = new Transport();
-
-
-
-        //    var connectionList = transport.GetConnections(fromstation, tostation).ConnectionList;
-        //    if (fromstation != connectionList.ToString())
-        //    {
-        //        MessageBox.Show(fromstation + " existiert nicht. Meinten Sie:" + fromstation);
-        //    }
-
-
-        //    var starttransportList = transport.GetStations(fromstation).StationList;
-        //    var totransportList = transport.GetStations(tostation).StationList;
-
-        //    if (fromstation != starttransportList.ToString())
-        //    {
-        //        MessageBox.Show("Die eingegebene Startstation existiert nicht.");
-        //    }
-        //    else if(tostation != totransportList.ToString())
-        //    {
-        //        MessageBox.Show("Die eingegebene Startstation existiert nicht.");
-        //    }
-
-        //    else if(fromstation != starttransportList.ToString() && tostation != totransportList.ToString())
-        //    {
-        //        MessageBox.Show("Die eingegebenen Stationen existieren nicht.");
-        //    }
-
-        //}
 
         //--------A004--------
         //AutoComplete-Funktion --> liest Stationen aus StationList
@@ -140,12 +107,16 @@ namespace WindowsFormsApplication1
             string fromStation = txtStart.Text.ToString();
             string toStation = txtDestination.Text.ToString();
 
-
             var source = new AutoCompleteStringCollection();
-            Transport transport = new Transport();
+
+            DateTime date = dtpDate.Value;
+            DateTime time = dtpTime.Value;
+
 
             DataTable dt = new DataTable();
             this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            Transport transport = new Transport();
 
             if (rbConnections.Checked == true)
             {
@@ -154,37 +125,10 @@ namespace WindowsFormsApplication1
                 dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
                 dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
 
-
-                var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
-
-                //--------A001--------
-                //Validierung: Prüfen ob eingegebene Stationen existieren.
-
-                //Falls ein Komma oder Leerzeichen 
-                if(fromStation.Contains(",") || fromStation.Contains(" "))
-                {
-                    // Mach nichts
-                }
-                else if(fromStation == "" && fromStation==" ")
-                {
-                    //Einggabe nicht gültig
-                }
-                else  if (fromStation != connections.First().From.Station.Name && toStation != connections.First().To.Station.Name)
-                
-                {
-                    MessageBox.Show(fromStation + " und " + toStation + " existieren nicht. Meinten Sie: " + connections.First().From.Station.Name + " und " + connections.First().To.Station.Name + "?");
-                }   
-
-                else if (fromStation != connections.First().From.Station.Name)
-                {
-                    MessageBox.Show(fromStation + " existiert nicht. Meinten Sie: " + connections.First().From.Station.Name + "?");
-                }
-
-                else if(toStation != connections.First().To.Station.Name)
-                {
-                    MessageBox.Show(toStation + " existiert nicht. Meinten Sie: " + connections.First().To.Station.Name + "?"); 
-                }
-
+                //--------A005--------
+                //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
+                //Diese Funktion macht dasselbe wie GetConnections, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
+                var connections = transport.GetConnectionsbyDateTime(fromStation, toStation, date, time).ConnectionList;
 
 
                 foreach (var connection in connections)
@@ -194,7 +138,8 @@ namespace WindowsFormsApplication1
                        connection.From.Platform + Environment.NewLine +
                        connection.To.Platform,
                        Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine +
-                       Convert.ToDateTime(connection.To.Arrival).ToShortTimeString());
+                       Convert.ToDateTime(connection.To.Arrival).ToShortTimeString()
+                       );
                 }
             }
             else
@@ -203,22 +148,15 @@ namespace WindowsFormsApplication1
                 dt.Columns.Add(new DataColumn("Linie"));
                 dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
 
-
-                var stationboard = transport.GetStationBoard(fromStation, transport.GetStations(fromStation).StationList[0].Id).Entries;
-
-                //--------A001--------
-                //Validierung: Prüfen ob eingegebene Station existiert.
-                if (fromStation != stationboard.First().Name)
-                {
-                    MessageBox.Show(fromStation + " existiert nicht. Meinten Sie: " + stationboard.First().Name + "?");
-                }
+                var stationboard = transport.GetStationBoardbyDateTime(fromStation, transport.GetStations(fromStation).StationList[0].Id, date, time).Entries;
 
 
                 foreach (var connectionsFrom in stationboard)
                 {
                     dt.Rows.Add(connectionsFrom.To,
                         connectionsFrom.Name,
-                        connectionsFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
+                        //connectionsFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
+                        Convert.ToDateTime(connectionsFrom.Stop.Departure).ToShortTimeString()
                         );
                 }              
             }
@@ -226,20 +164,11 @@ namespace WindowsFormsApplication1
             dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridConnections.DataSource = dt;
-
-
-        }
-
-        //Fenster per Schliessen-Button schliessen
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
 
         //--------A006--------
         //FUNKTION: Koordinaten aus der eingegebenen Station lesen und den Standort im Browser auf Google Maps anzeigen
-
         public void ShowOnMaps(string station)
         {
             Transport transport = new Transport();
@@ -255,17 +184,20 @@ namespace WindowsFormsApplication1
         {
             string fromStation = txtStart.Text.ToString();
             ShowOnMaps(fromStation);
-
         }
 
         //Eingegebene Endstation per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
         private void btnMapsTo_Click(object sender, EventArgs e)
         {
             string toStation = txtDestination.Text.ToString();
-            ShowOnMaps(toStation);
-            
+            ShowOnMaps(toStation);         
         }
 
 
+        //Fenster per Schliessen-Button schliessen
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

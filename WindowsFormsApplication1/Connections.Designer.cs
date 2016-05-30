@@ -35,14 +35,19 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.dataGridConnections = new System.Windows.Forms.DataGridView();
+            this.lblSeparator = new System.Windows.Forms.Label();
+            this.rbConnections = new System.Windows.Forms.RadioButton();
+            this.rbStationBoard = new System.Windows.Forms.RadioButton();
+            this.lblTitel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
             this.SuspendLayout();
             // 
             // btnShowConnections
             // 
-            this.btnShowConnections.Location = new System.Drawing.Point(53, 130);
+            this.btnShowConnections.Location = new System.Drawing.Point(274, 162);
+            this.btnShowConnections.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnShowConnections.Name = "btnShowConnections";
-            this.btnShowConnections.Size = new System.Drawing.Size(140, 23);
+            this.btnShowConnections.Size = new System.Drawing.Size(187, 28);
             this.btnShowConnections.TabIndex = 0;
             this.btnShowConnections.Text = "Verbindungen anzeigen";
             this.btnShowConnections.UseVisualStyleBackColor = true;
@@ -51,43 +56,50 @@
             // txtStart
             // 
             this.txtStart.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtStart.Location = new System.Drawing.Point(128, 25);
+            this.txtStart.Location = new System.Drawing.Point(355, 35);
+            this.txtStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(300, 20);
+            this.txtStart.Size = new System.Drawing.Size(399, 22);
             this.txtStart.TabIndex = 1;
             this.txtStart.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartStation_KeyUp);
             // 
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(50, 28);
+            this.lblFrom.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrom.Location = new System.Drawing.Point(270, 36);
+            this.lblFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(26, 13);
+            this.lblFrom.Size = new System.Drawing.Size(42, 19);
             this.lblFrom.TabIndex = 3;
-            this.lblFrom.Text = "Von";
+            this.lblFrom.Text = "Von:";
             // 
             // lblDestination
             // 
             this.lblDestination.AutoSize = true;
-            this.lblDestination.Location = new System.Drawing.Point(50, 71);
+            this.lblDestination.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDestination.Location = new System.Drawing.Point(270, 89);
+            this.lblDestination.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDestination.Name = "lblDestination";
-            this.lblDestination.Size = new System.Drawing.Size(33, 13);
+            this.lblDestination.Size = new System.Drawing.Size(52, 19);
             this.lblDestination.TabIndex = 4;
-            this.lblDestination.Text = "Nach";
+            this.lblDestination.Text = "Nach:";
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(128, 64);
+            this.txtDestination.Location = new System.Drawing.Point(355, 88);
+            this.txtDestination.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(300, 20);
+            this.txtDestination.Size = new System.Drawing.Size(399, 22);
             this.txtDestination.TabIndex = 5;
             this.txtDestination.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EndStation_KeyUp);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(414, 333);
+            this.btnClose.Location = new System.Drawing.Point(755, 412);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(114, 23);
+            this.btnClose.Size = new System.Drawing.Size(152, 28);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Schliessen";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -97,19 +109,66 @@
             // 
             this.dataGridConnections.AllowUserToAddRows = false;
             this.dataGridConnections.AllowUserToDeleteRows = false;
-            this.dataGridConnections.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridConnections.BackgroundColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.dataGridConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConnections.Location = new System.Drawing.Point(53, 169);
+            this.dataGridConnections.Location = new System.Drawing.Point(274, 210);
+            this.dataGridConnections.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridConnections.Name = "dataGridConnections";
             this.dataGridConnections.ReadOnly = true;
-            this.dataGridConnections.Size = new System.Drawing.Size(375, 158);
+            this.dataGridConnections.Size = new System.Drawing.Size(480, 194);
             this.dataGridConnections.TabIndex = 11;
+            // 
+            // lblSeparator
+            // 
+            this.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSeparator.Location = new System.Drawing.Point(225, 9);
+            this.lblSeparator.Name = "lblSeparator";
+            this.lblSeparator.Size = new System.Drawing.Size(2, 437);
+            this.lblSeparator.TabIndex = 12;
+            // 
+            // rbConnections
+            // 
+            this.rbConnections.AutoSize = true;
+            this.rbConnections.Checked = true;
+            this.rbConnections.Location = new System.Drawing.Point(12, 81);
+            this.rbConnections.Name = "rbConnections";
+            this.rbConnections.Size = new System.Drawing.Size(185, 21);
+            this.rbConnections.TabIndex = 13;
+            this.rbConnections.TabStop = true;
+            this.rbConnections.Text = "Verbindungen Von-Nach";
+            this.rbConnections.UseVisualStyleBackColor = true;
+            this.rbConnections.CheckedChanged += new System.EventHandler(this.rbConnections_CheckedChanged);
+            // 
+            // rbStationBoard
+            // 
+            this.rbStationBoard.AutoSize = true;
+            this.rbStationBoard.Location = new System.Drawing.Point(12, 130);
+            this.rbStationBoard.Name = "rbStationBoard";
+            this.rbStationBoard.Size = new System.Drawing.Size(109, 21);
+            this.rbStationBoard.TabIndex = 14;
+            this.rbStationBoard.Text = "Abfahrtstafel";
+            this.rbStationBoard.UseVisualStyleBackColor = true;
+            // 
+            // lblTitel
+            // 
+            this.lblTitel.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblTitel.Location = new System.Drawing.Point(2, 26);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(207, 40);
+            this.lblTitel.TabIndex = 15;
+            this.lblTitel.Text = "SwissTransport";
             // 
             // frmConnections
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 368);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(917, 453);
+            this.Controls.Add(this.lblTitel);
+            this.Controls.Add(this.rbStationBoard);
+            this.Controls.Add(this.rbConnections);
+            this.Controls.Add(this.lblSeparator);
             this.Controls.Add(this.dataGridConnections);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtDestination);
@@ -117,8 +176,9 @@
             this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.txtStart);
             this.Controls.Add(this.btnShowConnections);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmConnections";
-            this.Text = "Verbindungen Von - Nach";
+            this.Text = "SwissTransport";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,6 +194,10 @@
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridView dataGridConnections;
+        private System.Windows.Forms.Label lblSeparator;
+        private System.Windows.Forms.RadioButton rbStationBoard;
+        public System.Windows.Forms.RadioButton rbConnections;
+        private System.Windows.Forms.Label lblTitel;
     }
 }
 

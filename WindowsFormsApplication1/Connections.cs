@@ -19,13 +19,11 @@ namespace WindowsFormsApplication1
         }
 
         //--------A001--------
-        //Validation: Prüfen ob eingegebene Station existiert.
-        public void ValidateInput(string station)
+        //Validation: Prüfen ob eingegebene Station (bei Abfahrtstafel) existiert.
+        public void ValidateInputStation(string station)
         {
             var source = new AutoCompleteStringCollection();
-            Transport transport = new Transport();
-
-            
+            Transport transport = new Transport();            
 
             var transportList = transport.GetStations(station).StationList;
 
@@ -34,6 +32,40 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Die eingegebene Station existiert nicht.");
             }
         }
+
+        //Validation: Prüfen ob eingebene Start- und Endstation (bei Verbindungen Von-Nach) existiert.
+        //public void ValidateInputStartToStation(string fromstation, string tostation)
+        //{
+        //    var source = new AutoCompleteStringCollection();
+        //    Transport transport = new Transport();
+
+
+
+        //    var connectionList = transport.GetConnections(fromstation, tostation).ConnectionList;
+        //    if (fromstation != connectionList.ToString())
+        //    {
+        //        MessageBox.Show(fromstation + " existiert nicht. Meinten Sie:" + fromstation);
+        //    }
+
+
+        //    var starttransportList = transport.GetStations(fromstation).StationList;
+        //    var totransportList = transport.GetStations(tostation).StationList;
+
+        //    if (fromstation != starttransportList.ToString())
+        //    {
+        //        MessageBox.Show("Die eingegebene Startstation existiert nicht.");
+        //    }
+        //    else if(tostation != totransportList.ToString())
+        //    {
+        //        MessageBox.Show("Die eingegebene Startstation existiert nicht.");
+        //    }
+
+        //    else if(fromstation != starttransportList.ToString() && tostation != totransportList.ToString())
+        //    {
+        //        MessageBox.Show("Die eingegebenen Stationen existieren nicht.");
+        //    }
+
+        //}
 
         //--------A004--------
         //AutoComplete-Funktion --> liest Stationen aus StationList
@@ -74,6 +106,31 @@ namespace WindowsFormsApplication1
             }
         }
 
+
+        //Per RadioButton prüfen, ob Verbindungen Von-Nach oder Abfahrtstafel selektiert ist und je nach dem txtDestination enabeln oder disabeln
+        private void rbConnections_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbConnections.Checked == true)
+            {
+                txtStart.Text = "";
+                txtDestination.Text = "";
+                txtDestination.Show();
+                lblDestination.Show();
+                this.dataGridConnections.DataSource = null;
+                this.dataGridConnections.Rows.Clear();               
+            }
+            else
+            {
+                txtStart.Text = "";
+                txtDestination.Hide();
+                lblDestination.Hide();
+                
+                this.dataGridConnections.DataSource = null;
+                this.dataGridConnections.Rows.Clear();
+            }
+        }
+
+
         //--------A002--------
         //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
         private void btnShowConnections_Click(object sender, EventArgs e)
@@ -81,53 +138,81 @@ namespace WindowsFormsApplication1
             string fromStation = txtStart.Text.ToString();
             string toStation = txtDestination.Text.ToString();
 
-            bool isValid = true;
 
             var source = new AutoCompleteStringCollection();
             Transport transport = new Transport();
 
-
-            var fromtransportList = transport.GetStations(fromStation).StationList;
-            if (fromStation != fromtransportList.ToString())
-            {
-                MessageBox.Show("Die Startstation existiert nicht.");
-                isValid = false;
-            }
-
-            var totransportList = transport.GetStations(toStation).StationList;
-            if(toStation != totransportList.ToString())
-            {
-                MessageBox.Show("Die eingegebene Endstation existiert nicht.");
-            }
-
-
-
-            ValidateInput(fromStation);         //Prüfen ob eingegebene Station existiert
-            ValidateInput(toStation);
-
-
             DataTable dt = new DataTable();
             this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
-            dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
-            dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
 
-            //dt.Columns.Add(new DataColumn("Ankunft", typeof(string)));
-
-            var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
-            foreach (var connection in connections)
+            if (rbConnections.Checked == true)
             {
-                dt.Rows.Add(connection.From.Station.Name + Environment.NewLine + 
-                    connection.To.Station.Name,
-                    connection.From.Platform + Environment.NewLine +
-                    connection.To.Platform, 
-                    Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine + 
-                    Convert.ToDateTime(connection.To.Arrival).ToShortTimeString());
-            }
+                
+                dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
+                dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
+                dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
 
+
+                var connections = transport.GetConnections(fromStation, toStation).ConnectionList;
+
+                //--------A001--------
+                //Validierung: Prüfen ob eingegebene Stationen existieren.
+                if (fromStation != connections.First().From.Station.Name && toStation != connections.First().To.Station.Name)
+                {
+                    MessageBox.Show(fromStation + " und " + toStation + " existieren nicht. Meinten Sie: " + connections.First().From.Station.Name + " und " + connections.First().To.Station.Name + "?");
+                }   
+
+                else if (fromStation != connections.First().From.Station.Name)
+                {
+                    MessageBox.Show(fromStation + " existiert nicht. Meinten Sie: " + connections.First().From.Station.Name + "?");
+                }
+
+                else if(toStation != connections.First().To.Station.Name)
+                {
+                    MessageBox.Show(toStation + " existiert nicht. Meinten Sie: " + connections.First().To.Station.Name + "?"); 
+                }
+
+
+                foreach (var connection in connections)
+                {
+                    dt.Rows.Add(connection.From.Station.Name + Environment.NewLine +
+                       connection.To.Station.Name,
+                       connection.From.Platform + Environment.NewLine +
+                       connection.To.Platform,
+                       Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine +
+                       Convert.ToDateTime(connection.To.Arrival).ToShortTimeString());
+                }
+            }
+            else
+            {
+                dt.Columns.Add(new DataColumn("Nach"));
+                dt.Columns.Add(new DataColumn("Linie"));
+                dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
+
+
+                var stationboard = transport.GetStationBoard(fromStation, transport.GetStations(fromStation).StationList[0].Id).Entries;
+
+                //--------A001--------
+                //Validierung: Prüfen ob eingegebene Stationen existieren.
+                if (fromStation != stationboard.First().Name)
+                {
+                    MessageBox.Show(fromStation + " existiert nicht. Meinten Sie: " + stationboard.First().Name + "?");
+                }
+
+
+                foreach (var connectionsFrom in stationboard)
+                {
+                    dt.Rows.Add(connectionsFrom.To,
+                        connectionsFrom.Name,
+                        connectionsFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
+                        );
+                }              
+            }
             dataGridConnections.RowTemplate.Height = 30;
+            dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridConnections.DataSource = dt;
+
 
         }
 
@@ -136,5 +221,7 @@ namespace WindowsFormsApplication1
         {
             this.Close();
         }
+
+
     }
 }

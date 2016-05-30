@@ -124,6 +124,8 @@ namespace WindowsFormsApplication1
                 txtStart.Text = "";
                 txtDestination.Hide();
                 lblDestination.Hide();
+                //der Button "Endstation auf Maps" nicht mehr anzeigen.
+                btnMapsTo.Hide();
                 
                 this.dataGridConnections.DataSource = null;
                 this.dataGridConnections.Rows.Clear();
@@ -157,7 +159,18 @@ namespace WindowsFormsApplication1
 
                 //--------A001--------
                 //Validierung: Prüfen ob eingegebene Stationen existieren.
-                if (fromStation != connections.First().From.Station.Name && toStation != connections.First().To.Station.Name)
+
+                //Falls ein Komma oder Leerzeichen 
+                if(fromStation.Contains(",") || fromStation.Contains(" "))
+                {
+                    // Mach nichts
+                }
+                else if(fromStation == "" && fromStation==" ")
+                {
+                    //Einggabe nicht gültig
+                }
+                else  if (fromStation != connections.First().From.Station.Name && toStation != connections.First().To.Station.Name)
+                
                 {
                     MessageBox.Show(fromStation + " und " + toStation + " existieren nicht. Meinten Sie: " + connections.First().From.Station.Name + " und " + connections.First().To.Station.Name + "?");
                 }   
@@ -171,6 +184,7 @@ namespace WindowsFormsApplication1
                 {
                     MessageBox.Show(toStation + " existiert nicht. Meinten Sie: " + connections.First().To.Station.Name + "?"); 
                 }
+
 
 
                 foreach (var connection in connections)
@@ -193,7 +207,7 @@ namespace WindowsFormsApplication1
                 var stationboard = transport.GetStationBoard(fromStation, transport.GetStations(fromStation).StationList[0].Id).Entries;
 
                 //--------A001--------
-                //Validierung: Prüfen ob eingegebene Stationen existieren.
+                //Validierung: Prüfen ob eingegebene Station existiert.
                 if (fromStation != stationboard.First().Name)
                 {
                     MessageBox.Show(fromStation + " existiert nicht. Meinten Sie: " + stationboard.First().Name + "?");
@@ -220,6 +234,36 @@ namespace WindowsFormsApplication1
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        //--------A006--------
+        //FUNKTION: Koordinaten aus der eingegebenen Station lesen und den Standort im Browser auf Google Maps anzeigen
+
+        public void ShowOnMaps(string station)
+        {
+            Transport transport = new Transport();
+
+            double x = transport.GetStations(station).StationList[0].Coordinate.XCoordinate;
+            double y = transport.GetStations(station).StationList[0].Coordinate.YCoordinate;
+
+            System.Diagnostics.Process.Start("http://google.ch/maps/place/" + x + "+" + y);
+        }
+
+        //Eingegebene Startstation per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
+        private void btnMaps_Click(object sender, EventArgs e)
+        {
+            string fromStation = txtStart.Text.ToString();
+            ShowOnMaps(fromStation);
+
+        }
+
+        //Eingegebene Endstation per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
+        private void btnMapsTo_Click(object sender, EventArgs e)
+        {
+            string toStation = txtDestination.Text.ToString();
+            ShowOnMaps(toStation);
+            
         }
 
 

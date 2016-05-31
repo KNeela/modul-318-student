@@ -46,7 +46,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.btnSendviaMail = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnShowConnections
@@ -221,7 +224,7 @@
             // dtpTime
             // 
             this.dtpTime.CustomFormat = "HH:mm";
-            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTime.Location = new System.Drawing.Point(266, 176);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
@@ -239,12 +242,30 @@
             this.btnSendviaMail.UseVisualStyleBackColor = false;
             this.btnSendviaMail.Click += new System.EventHandler(this.SendviaMail_Click);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 484);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(740, 22);
+            this.statusStrip.TabIndex = 24;
+            this.statusStrip.Text = "statusStrip";
+            // 
+            // toolStripLabel
+            // 
+            this.toolStripLabel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.toolStripLabel.Name = "toolStripLabel";
+            this.toolStripLabel.Size = new System.Drawing.Size(13, 17);
+            this.toolStripLabel.Text = "  ";
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(740, 484);
+            this.ClientSize = new System.Drawing.Size(740, 506);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.btnSendviaMail);
             this.Controls.Add(this.dtpTime);
             this.Controls.Add(this.label1);
@@ -267,6 +288,8 @@
             this.Text = "SwissTransport";
             this.Load += new System.EventHandler(this.SwissTransport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +315,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpTime;
         private System.Windows.Forms.Button btnSendviaMail;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripLabel;
     }
 }
 

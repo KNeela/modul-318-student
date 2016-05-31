@@ -24,7 +24,6 @@ namespace WindowsFormsApplication1
         Transport transport = new Transport();
         DataTable dt = new DataTable();
 
-
         #endregion
 
         #region Events
@@ -40,15 +39,16 @@ namespace WindowsFormsApplication1
 
             //--------A001--------
             //Validierung: Prüfen ob eingegebene Stationen gültig sind.
-            if (string.IsNullOrEmpty(fromStation) && string.IsNullOrEmpty(toStation))
+            if (string.IsNullOrEmpty(fromStation) && string.IsNullOrEmpty(toStation) && rbConnections.Checked== true)
             {
                 isValid = false;
-                MessageBox.Show("Es wurden keine Stationen eingegeben.");
+                MessageBox.Show("Es wurden keine Stationen eingegeben.");              
             }
             if (isValid)
             {
                 if (string.IsNullOrEmpty(fromStation))
                 {
+                    
                     isValid = false;
                     MessageBox.Show("Die Startstation ist ungültig.");
                 }
@@ -58,11 +58,17 @@ namespace WindowsFormsApplication1
             {
                 if (string.IsNullOrEmpty(toStation) && rbConnections.Checked == true)
                 {
+                    
                     isValid = false;
                     MessageBox.Show("Die Endstation ist ungültig.");
                 }
             }
 
+            if(!isValid)
+            {
+                toolStripLabel.Text = string.Format("Verbindungen konnten nicht geladen werden.");
+                statusStrip.Refresh();
+            }
 
             //--------A002--------
             //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
@@ -73,10 +79,7 @@ namespace WindowsFormsApplication1
                 DateTime date = dtpDate.Value;
                 DateTime time = dtpTime.Value;
 
-
-                dt.Columns.Clear();
-                dt.Rows.Clear();
-                dt.Clear();
+                //DataGridView: Zeilenumbruch in Zellen
                 this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
                 if (rbConnections.Checked == true)
@@ -102,6 +105,8 @@ namespace WindowsFormsApplication1
                            connection.Duration.Substring(3, 2) + "h " + connection.Duration.Substring(6, 2) +"min"
                            );
                     }
+                    toolStripLabel.Text = string.Format("Verbindungen wurden geladen.");
+                    statusStrip.Refresh();
                 }
                 else
                 {
@@ -124,6 +129,8 @@ namespace WindowsFormsApplication1
                             Convert.ToDateTime(connectionsFrom.Stop.Departure).ToShortTimeString()
                             );
                     }
+                    toolStripLabel.Text = string.Format("Verbindungen wurden geladen.");
+                    statusStrip.Refresh();
                 }
                 dataGridConnections.RowTemplate.Height = 35;
                 dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -162,6 +169,8 @@ namespace WindowsFormsApplication1
         {
             if (rbConnections.Checked == true)
             {
+                toolStripLabel.Text = string.Format("");
+                statusStrip.Refresh();
                 txtStart.Text = "";
                 txtDestination.Text = "";
                 txtDestination.Show();
@@ -171,6 +180,8 @@ namespace WindowsFormsApplication1
             }
             else
             {
+                toolStripLabel.Text = string.Format("");
+                statusStrip.Refresh();
                 txtStart.Text = "";
                 txtDestination.Hide();
                 lblDestination.Hide();
@@ -201,6 +212,12 @@ namespace WindowsFormsApplication1
         {
             string toStation = txtDestination.Text.ToString();
             ShowOnMaps(toStation);         
+        }
+
+        private void SendviaMail_Click(object sender, EventArgs e)
+        {
+            frmSendMail SendMailForm = new frmSendMail();
+            SendMailForm.ShowDialog();
         }
 
         //Fenster per Schliessen-Button schliessen
@@ -248,11 +265,5 @@ namespace WindowsFormsApplication1
         }
 
         #endregion
-
-        private void SendviaMail_Click(object sender, EventArgs e)
-        {
-            frmSendMail SendMailForm = new frmSendMail();
-            SendMailForm.ShowDialog();
-        }
     }
 }

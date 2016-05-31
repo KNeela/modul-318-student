@@ -156,7 +156,7 @@
             this.Controls.Add(this.lblTo);
             this.Controls.Add(this.lblFrom);
             this.Name = "frmSendMail";
-            this.Text = "SendMail";
+            this.Text = "Email senden";
             this.Load += new System.EventHandler(this.SendMail_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,4 +1,5 @@
 ﻿using SwissTransport;
+using SwissTransportTimeTable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace WindowsFormsApplication1
 {
@@ -246,5 +248,11 @@ namespace WindowsFormsApplication1
         }
 
         #endregion
+
+        private void SendviaMail_Click(object sender, EventArgs e)
+        {
+            frmSendMail SendMailForm = new frmSendMail();
+            SendMailForm.ShowDialog();
+        }
     }
 }

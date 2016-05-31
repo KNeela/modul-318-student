@@ -45,6 +45,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
+            this.btnSendviaMail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,20 +201,20 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Font = new System.Drawing.Font("Arial", 10.2F);
             this.lblDate.Location = new System.Drawing.Point(202, 141);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(50, 16);
+            this.lblDate.Size = new System.Drawing.Size(53, 16);
             this.lblDate.TabIndex = 21;
             this.lblDate.Text = "Datum:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial", 10.2F);
             this.label1.Location = new System.Drawing.Point(202, 180);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 16);
+            this.label1.Size = new System.Drawing.Size(35, 16);
             this.label1.TabIndex = 22;
             this.label1.Text = "Zeit:";
             // 
@@ -227,12 +228,24 @@
             this.dtpTime.Size = new System.Drawing.Size(79, 20);
             this.dtpTime.TabIndex = 4;
             // 
+            // btnSendviaMail
+            // 
+            this.btnSendviaMail.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnSendviaMail.Location = new System.Drawing.Point(526, 221);
+            this.btnSendviaMail.Name = "btnSendviaMail";
+            this.btnSendviaMail.Size = new System.Drawing.Size(111, 23);
+            this.btnSendviaMail.TabIndex = 23;
+            this.btnSendviaMail.Text = "via Mail weiterleiten";
+            this.btnSendviaMail.UseVisualStyleBackColor = false;
+            this.btnSendviaMail.Click += new System.EventHandler(this.SendviaMail_Click);
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(740, 484);
+            this.Controls.Add(this.btnSendviaMail);
             this.Controls.Add(this.dtpTime);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblDate);
@@ -278,6 +291,7 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpTime;
+        private System.Windows.Forms.Button btnSendviaMail;
     }
 }
 

@@ -18,35 +18,112 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        //--------A001--------
-        //Validation: Prüfen ob eingegebene Station (bei Abfahrtstafel) existiert.
-        public void ValidateInputStation(string station)
+        #region Variabeln
+        Transport transport = new Transport();
+        DataTable dt = new DataTable();
+
+        #endregion
+
+        #region Events
+        //Buttonclick auf "Verbindungen anzeigen"
+        private void btnShowConnections_Click(object sender, EventArgs e)
         {
-            var source = new AutoCompleteStringCollection();
-            Transport transport = new Transport();            
+            //Sanduhr einblenden
+            Cursor.Current = Cursors.WaitCursor;
 
-            var transportList = transport.GetStations(station).StationList;
+            bool isValid = true;
+            string fromStation = txtStart.Text;
+            string toStation = txtDestination.Text;
 
-            if (station != transportList.ToString())
+            //--------A001--------
+            //Validierung: Prüfen ob eingegebene Stationen gültig sind.
+            if (string.IsNullOrEmpty(fromStation) && string.IsNullOrEmpty(toStation))
             {
-                MessageBox.Show("Die eingegebene Station existiert nicht.");
+                isValid = false;
+                MessageBox.Show("Es wurden keine Stationen eingegeben.");
             }
-        }
-
-
-        //--------A004--------
-        //AutoComplete-Funktion --> liest Stationen aus StationList
-        public AutoCompleteStringCollection AutoComplete(string station)
-        {
-            var source = new AutoCompleteStringCollection();
-            Transport transport = new Transport();
-
-            var transportList = transport.GetStations(station).StationList;
-            foreach (var transportStation in transportList)
+            if (isValid)
             {
-                source.Add(transportStation.Name.ToString());
+                if (string.IsNullOrEmpty(fromStation))
+                {
+                    isValid = false;
+                    MessageBox.Show("Die Startstation ist ungültig.");
+                }
             }
-            return source;
+
+            if (isValid)
+            {
+                if (string.IsNullOrEmpty(toStation))
+                {
+                    isValid = false;
+                    MessageBox.Show("Die Endstation ist ungültig.");
+                }
+            }
+
+
+            //--------A002--------
+            //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
+            if (isValid)
+            {
+                var source = new AutoCompleteStringCollection();
+
+                DateTime date = dtpDate.Value;
+                DateTime time = dtpTime.Value;
+
+                dt.Columns.Clear();
+                dt.Rows.Clear();
+                dt.Clear();
+                this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+                if (rbConnections.Checked == true)
+                {
+                    dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
+                    dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
+                    dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
+
+                    //--------A005--------
+                    //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
+                    //Diese Funktion macht dasselbe wie GetConnections, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
+                    var connections = transport.GetConnectionsbyDateTime(fromStation, toStation, date, time).ConnectionList;
+
+                    foreach (var connection in connections)
+                    {
+                        dt.Rows.Add(connection.From.Station.Name + Environment.NewLine +
+                           connection.To.Station.Name,
+                           connection.From.Platform + Environment.NewLine +
+                           connection.To.Platform,
+                           Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine +
+                           Convert.ToDateTime(connection.To.Arrival).ToShortTimeString()
+                           );
+                    }
+                }
+                else
+                {
+                    //--------A003--------
+                    //Verbindungen ab eingegebener Station in DataGrid ausgeben
+                    dt.Columns.Add(new DataColumn("Nach"));
+                    dt.Columns.Add(new DataColumn("Linie"));
+                    dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
+
+                    //--------A005--------
+                    //Bei der Klasse Transport.cs GetStationBoardbyDateTime-Funktion hinzugefügt.
+                    //Diese Funktion macht dasselbe wie GetStationboard, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
+                    var stationboard = transport.GetStationBoardbyDateTime(fromStation, transport.GetStations(fromStation).StationList[0].Id, date, time).Entries;
+
+                    foreach (var connectionsFrom in stationboard)
+                    {
+                        dt.Rows.Add(connectionsFrom.To,
+                            connectionsFrom.Name,
+                            Convert.ToDateTime(connectionsFrom.Stop.Departure).ToShortTimeString()
+                            );
+                    }
+                }
+                dataGridConnections.RowTemplate.Height = 30;
+                dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridConnections.DataSource = dt;
+            }
+            //Cursor wieder auf Default setzen
+            Cursor = Cursors.Default;
         }
 
         //--------A004--------
@@ -73,7 +150,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-
         //Per RadioButton prüfen, ob Verbindungen Von-Nach oder Abfahrtstafel selektiert ist und je nach dem txtDestination enabeln oder disabeln
         private void rbConnections_CheckedChanged(object sender, EventArgs e)
         {
@@ -84,7 +160,7 @@ namespace WindowsFormsApplication1
                 txtDestination.Show();
                 lblDestination.Show();
                 this.dataGridConnections.DataSource = null;
-                this.dataGridConnections.Rows.Clear();               
+                this.dataGridConnections.Rows.Clear();
             }
             else
             {
@@ -93,111 +169,70 @@ namespace WindowsFormsApplication1
                 lblDestination.Hide();
                 //der Button "Endstation auf Maps" nicht mehr anzeigen.
                 btnMapsTo.Hide();
-                
+
                 this.dataGridConnections.DataSource = null;
                 this.dataGridConnections.Rows.Clear();
             }
         }
 
-
-        //--------A002--------
-        //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
-        private void btnShowConnections_Click(object sender, EventArgs e)
-        {
-            string fromStation = txtStart.Text.ToString();
-            string toStation = txtDestination.Text.ToString();
-
-            var source = new AutoCompleteStringCollection();
-
-            DateTime date = dtpDate.Value;
-            DateTime time = dtpTime.Value;
-
-
-            DataTable dt = new DataTable();
-            this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-            Transport transport = new Transport();
-
-            if (rbConnections.Checked == true)
-            {
-                
-                dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
-                dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
-                dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
-
-                //--------A005--------
-                //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
-                //Diese Funktion macht dasselbe wie GetConnections, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
-                var connections = transport.GetConnectionsbyDateTime(fromStation, toStation, date, time).ConnectionList;
-
-
-                foreach (var connection in connections)
-                {
-                    dt.Rows.Add(connection.From.Station.Name + Environment.NewLine +
-                       connection.To.Station.Name,
-                       connection.From.Platform + Environment.NewLine +
-                       connection.To.Platform,
-                       Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine +
-                       Convert.ToDateTime(connection.To.Arrival).ToShortTimeString()
-                       );
-                }
-            }
-            else
-            {
-                dt.Columns.Add(new DataColumn("Nach"));
-                dt.Columns.Add(new DataColumn("Linie"));
-                dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
-
-                var stationboard = transport.GetStationBoardbyDateTime(fromStation, transport.GetStations(fromStation).StationList[0].Id, date, time).Entries;
-
-
-                foreach (var connectionsFrom in stationboard)
-                {
-                    dt.Rows.Add(connectionsFrom.To,
-                        connectionsFrom.Name,
-                        //connectionsFrom.Stop.Departure.TimeOfDay.ToString().Substring(0, 5)
-                        Convert.ToDateTime(connectionsFrom.Stop.Departure).ToShortTimeString()
-                        );
-                }              
-            }
-            dataGridConnections.RowTemplate.Height = 30;
-            dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            dataGridConnections.DataSource = dt;
-        }
-
-
         //--------A006--------
-        //FUNKTION: Koordinaten aus der eingegebenen Station lesen und den Standort im Browser auf Google Maps anzeigen
-        public void ShowOnMaps(string station)
-        {
-            Transport transport = new Transport();
-
-            double x = transport.GetStations(station).StationList[0].Coordinate.XCoordinate;
-            double y = transport.GetStations(station).StationList[0].Coordinate.YCoordinate;
-
-            System.Diagnostics.Process.Start("http://google.ch/maps/place/" + x + "+" + y);
-        }
-
-        //Eingegebene Startstation per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
+        //Eingegebene Station per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
         private void btnMaps_Click(object sender, EventArgs e)
         {
             string fromStation = txtStart.Text.ToString();
             ShowOnMaps(fromStation);
         }
 
-        //Eingegebene Endstation per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
         private void btnMapsTo_Click(object sender, EventArgs e)
         {
             string toStation = txtDestination.Text.ToString();
             ShowOnMaps(toStation);         
         }
 
-
         //Fenster per Schliessen-Button schliessen
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        #endregion
+
+        #region Funktionen
+        //--------A004--------
+        //AutoComplete-Funktion --> liest Stationen aus StationList
+        public AutoCompleteStringCollection AutoComplete(string station)
+        {
+            var source = new AutoCompleteStringCollection();
+
+            var transportList = transport.GetStations(station).StationList;
+            foreach (var transportStation in transportList)
+            {
+                source.Add(transportStation.Name.ToString());
+            }
+            return source;
+        }
+
+        //--------A006--------
+        //ShowOnMaps-Funktion: Koordinaten aus der eingegebenen Station lesen und den Standort im Browser auf Google Maps anzeigen
+        public void ShowOnMaps(string station)
+        {
+            if (!string.IsNullOrEmpty(station))
+            {
+                DialogResult dialogYesNo = MessageBox.Show("Standort nun im Browser auf Google Maps anzeigen?", "Hinweis", MessageBoxButtons.YesNo);
+                if (dialogYesNo == DialogResult.Yes)
+                {
+                    double x = transport.GetStations(station).StationList[0].Coordinate.XCoordinate;
+                    double y = transport.GetStations(station).StationList[0].Coordinate.YCoordinate;
+
+                    System.Diagnostics.Process.Start("http://www.google.ch/maps/place/" + x + "+" + y);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bitte geben Sie eine Station ein.");
+            }
+        }
+
+        #endregion
     }
 }

@@ -50,7 +50,7 @@
             // 
             // btnShowConnections
             // 
-            this.btnShowConnections.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnShowConnections.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnShowConnections.Location = new System.Drawing.Point(205, 221);
             this.btnShowConnections.Name = "btnShowConnections";
             this.btnShowConnections.Size = new System.Drawing.Size(140, 23);
@@ -98,7 +98,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnClose.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnClose.Location = new System.Drawing.Point(595, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(114, 23);
@@ -136,7 +136,7 @@
             this.rbConnections.AutoSize = true;
             this.rbConnections.Checked = true;
             this.rbConnections.Location = new System.Drawing.Point(9, 66);
-            this.rbConnections.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbConnections.Margin = new System.Windows.Forms.Padding(2);
             this.rbConnections.Name = "rbConnections";
             this.rbConnections.Size = new System.Drawing.Size(142, 17);
             this.rbConnections.TabIndex = 4;
@@ -149,7 +149,7 @@
             // 
             this.rbStationBoard.AutoSize = true;
             this.rbStationBoard.Location = new System.Drawing.Point(9, 106);
-            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2);
             this.rbStationBoard.Name = "rbStationBoard";
             this.rbStationBoard.Size = new System.Drawing.Size(84, 17);
             this.rbStationBoard.TabIndex = 5;
@@ -169,7 +169,7 @@
             // 
             // btnMapsFrom
             // 
-            this.btnMapsFrom.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnMapsFrom.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnMapsFrom.Location = new System.Drawing.Point(595, 24);
             this.btnMapsFrom.Name = "btnMapsFrom";
             this.btnMapsFrom.Size = new System.Drawing.Size(121, 23);
@@ -180,7 +180,7 @@
             // 
             // btnMapsTo
             // 
-            this.btnMapsTo.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnMapsTo.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnMapsTo.Location = new System.Drawing.Point(595, 72);
             this.btnMapsTo.Name = "btnMapsTo";
             this.btnMapsTo.Size = new System.Drawing.Size(121, 23);

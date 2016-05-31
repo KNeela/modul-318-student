@@ -54,7 +54,7 @@
             this.btnShowConnections.Location = new System.Drawing.Point(205, 221);
             this.btnShowConnections.Name = "btnShowConnections";
             this.btnShowConnections.Size = new System.Drawing.Size(140, 23);
-            this.btnShowConnections.TabIndex = 3;
+            this.btnShowConnections.TabIndex = 5;
             this.btnShowConnections.Text = "Verbindungen anzeigen";
             this.btnShowConnections.UseVisualStyleBackColor = false;
             this.btnShowConnections.Click += new System.EventHandler(this.btnShowConnections_Click);
@@ -102,7 +102,7 @@
             this.btnClose.Location = new System.Drawing.Point(595, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(114, 23);
-            this.btnClose.TabIndex = 6;
+            this.btnClose.TabIndex = 10;
             this.btnClose.Text = "Schliessen";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -119,16 +119,16 @@
             this.dataGridConnections.Location = new System.Drawing.Point(205, 267);
             this.dataGridConnections.Name = "dataGridConnections";
             this.dataGridConnections.ReadOnly = true;
-            this.dataGridConnections.Size = new System.Drawing.Size(372, 167);
+            this.dataGridConnections.Size = new System.Drawing.Size(432, 167);
             this.dataGridConnections.TabIndex = 11;
             // 
             // lblSeparator
             // 
             this.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblSeparator.Location = new System.Drawing.Point(169, 7);
+            this.lblSeparator.Location = new System.Drawing.Point(161, 7);
             this.lblSeparator.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSeparator.Name = "lblSeparator";
-            this.lblSeparator.Size = new System.Drawing.Size(2, 355);
+            this.lblSeparator.Size = new System.Drawing.Size(2, 470);
             this.lblSeparator.TabIndex = 12;
             // 
             // rbConnections
@@ -139,7 +139,7 @@
             this.rbConnections.Margin = new System.Windows.Forms.Padding(2);
             this.rbConnections.Name = "rbConnections";
             this.rbConnections.Size = new System.Drawing.Size(142, 17);
-            this.rbConnections.TabIndex = 4;
+            this.rbConnections.TabIndex = 8;
             this.rbConnections.TabStop = true;
             this.rbConnections.Text = "Verbindungen Von-Nach";
             this.rbConnections.UseVisualStyleBackColor = true;
@@ -152,7 +152,7 @@
             this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2);
             this.rbStationBoard.Name = "rbStationBoard";
             this.rbStationBoard.Size = new System.Drawing.Size(84, 17);
-            this.rbStationBoard.TabIndex = 5;
+            this.rbStationBoard.TabIndex = 9;
             this.rbStationBoard.Text = "Abfahrtstafel";
             this.rbStationBoard.UseVisualStyleBackColor = true;
             // 
@@ -173,7 +173,7 @@
             this.btnMapsFrom.Location = new System.Drawing.Point(595, 24);
             this.btnMapsFrom.Name = "btnMapsFrom";
             this.btnMapsFrom.Size = new System.Drawing.Size(121, 23);
-            this.btnMapsFrom.TabIndex = 16;
+            this.btnMapsFrom.TabIndex = 6;
             this.btnMapsFrom.Text = "Startstation auf Maps";
             this.btnMapsFrom.UseVisualStyleBackColor = false;
             this.btnMapsFrom.Click += new System.EventHandler(this.btnMaps_Click);
@@ -184,7 +184,7 @@
             this.btnMapsTo.Location = new System.Drawing.Point(595, 72);
             this.btnMapsTo.Name = "btnMapsTo";
             this.btnMapsTo.Size = new System.Drawing.Size(121, 23);
-            this.btnMapsTo.TabIndex = 17;
+            this.btnMapsTo.TabIndex = 7;
             this.btnMapsTo.Text = "Endstation auf Maps";
             this.btnMapsTo.UseVisualStyleBackColor = false;
             this.btnMapsTo.Click += new System.EventHandler(this.btnMapsTo_Click);
@@ -195,7 +195,7 @@
             this.dtpDate.Location = new System.Drawing.Point(266, 137);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(79, 20);
-            this.dtpDate.TabIndex = 20;
+            this.dtpDate.TabIndex = 3;
             // 
             // lblDate
             // 
@@ -225,7 +225,7 @@
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
             this.dtpTime.Size = new System.Drawing.Size(79, 20);
-            this.dtpTime.TabIndex = 23;
+            this.dtpTime.TabIndex = 4;
             // 
             // frmConnections
             // 
@@ -252,6 +252,7 @@
             this.Controls.Add(this.btnShowConnections);
             this.Name = "frmConnections";
             this.Text = "SwissTransport";
+            this.Load += new System.EventHandler(this.SwissTransport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -22,12 +22,13 @@ namespace WindowsFormsApplication1
         Transport transport = new Transport();
         DataTable dt = new DataTable();
 
+
         #endregion
 
         #region Events
         //Buttonclick auf "Verbindungen anzeigen"
         private void btnShowConnections_Click(object sender, EventArgs e)
-        {
+        {                         
             //Sanduhr einblenden
             Cursor.Current = Cursors.WaitCursor;
 
@@ -53,7 +54,7 @@ namespace WindowsFormsApplication1
 
             if (isValid)
             {
-                if (string.IsNullOrEmpty(toStation))
+                if (string.IsNullOrEmpty(toStation) && rbConnections.Checked == true)
                 {
                     isValid = false;
                     MessageBox.Show("Die Endstation ist ungültig.");
@@ -70,6 +71,7 @@ namespace WindowsFormsApplication1
                 DateTime date = dtpDate.Value;
                 DateTime time = dtpTime.Value;
 
+
                 dt.Columns.Clear();
                 dt.Rows.Clear();
                 dt.Clear();
@@ -80,12 +82,13 @@ namespace WindowsFormsApplication1
                     dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
                     dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
                     dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
-
+                    dt.Columns.Add(new DataColumn("Dauer"));
+                    
                     //--------A005--------
                     //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
                     //Diese Funktion macht dasselbe wie GetConnections, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
                     var connections = transport.GetConnectionsbyDateTime(fromStation, toStation, date, time).ConnectionList;
-
+                    
                     foreach (var connection in connections)
                     {
                         dt.Rows.Add(connection.From.Station.Name + Environment.NewLine +
@@ -93,7 +96,8 @@ namespace WindowsFormsApplication1
                            connection.From.Platform + Environment.NewLine +
                            connection.To.Platform,
                            Convert.ToDateTime(connection.From.Departure).ToShortTimeString() + Environment.NewLine +
-                           Convert.ToDateTime(connection.To.Arrival).ToShortTimeString()
+                           Convert.ToDateTime(connection.To.Arrival).ToShortTimeString(),
+                           connection.Duration.Substring(3, 2) + "h " + connection.Duration.Substring(6, 2) +"min"
                            );
                     }
                 }
@@ -110,6 +114,7 @@ namespace WindowsFormsApplication1
                     //Diese Funktion macht dasselbe wie GetStationboard, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.
                     var stationboard = transport.GetStationBoardbyDateTime(fromStation, transport.GetStations(fromStation).StationList[0].Id, date, time).Entries;
 
+
                     foreach (var connectionsFrom in stationboard)
                     {
                         dt.Rows.Add(connectionsFrom.To,
@@ -118,7 +123,7 @@ namespace WindowsFormsApplication1
                             );
                     }
                 }
-                dataGridConnections.RowTemplate.Height = 30;
+                dataGridConnections.RowTemplate.Height = 35;
                 dataGridConnections.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridConnections.DataSource = dt;
             }
@@ -173,6 +178,13 @@ namespace WindowsFormsApplication1
                 this.dataGridConnections.DataSource = null;
                 this.dataGridConnections.Rows.Clear();
             }
+        }
+
+        //--------A005--------
+        private void SwissTransport_Load(object sender, EventArgs e)
+        {
+            //Wenn ein vergangenes Datum gewählt wird, wird das Datum automatisch auf das heutige Datum gesetzt.
+            dtpDate.MinDate = DateTime.Today;
         }
 
         //--------A006--------

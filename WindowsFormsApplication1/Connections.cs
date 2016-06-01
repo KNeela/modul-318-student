@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +32,8 @@ namespace WindowsFormsApplication1
             Cursor.Current = Cursors.WaitCursor;
 
             bool isValid = true;
+
+            //Eingaben vom User
             string fromStation = txtStart.Text;
             string toStation = txtDestination.Text;
 
@@ -74,20 +74,28 @@ namespace WindowsFormsApplication1
             //Verbindungen zwischen Start- und Endstation in DataGrid ausgeben
             if (isValid)
             {
+                toolStripLabel.Text = string.Format("Verbindungen werden geladen.");
+                statusStrip.Refresh();
+
                 var source = new AutoCompleteStringCollection();
 
                 DateTime date = dtpDate.Value;
                 DateTime time = dtpTime.Value;
 
                 //DataGridView: Zeilenumbruch in Zellen
-                this.dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                dataGridConnections.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
 
                 if (rbConnections.Checked == true)
                 {
+                    
+
                     dt.Columns.Add(new DataColumn("Von/" + Environment.NewLine + "Nach"));
                     dt.Columns.Add(new DataColumn("Abfahrt Gleis/" + Environment.NewLine + "Ankunft Gleis"));
                     dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
                     dt.Columns.Add(new DataColumn("Dauer"));
+
+                    
                     
                     //--------A005--------
                     //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
@@ -105,6 +113,8 @@ namespace WindowsFormsApplication1
                            connection.Duration.Substring(3, 2) + "h " + connection.Duration.Substring(6, 2) +"min"
                            );
                     }
+
+
                     toolStripLabel.Text = string.Format("Verbindungen wurden geladen.");
                     statusStrip.Refresh();
                 }
@@ -114,7 +124,7 @@ namespace WindowsFormsApplication1
                     //Verbindungen ab eingegebener Station in DataGrid ausgeben
                     dt.Columns.Add(new DataColumn("Nach"));
                     dt.Columns.Add(new DataColumn("Linie"));
-                    dt.Columns.Add(new DataColumn("Abfahrtszeit/"));
+                    dt.Columns.Add(new DataColumn("Abfahrtszeit"));
 
                     //--------A005--------
                     //Bei der Klasse Transport.cs GetStationBoardbyDateTime-Funktion hinzugefügt.
@@ -175,8 +185,10 @@ namespace WindowsFormsApplication1
                 txtDestination.Text = "";
                 txtDestination.Show();
                 lblDestination.Show();
-                this.dataGridConnections.DataSource = null;
-                this.dataGridConnections.Rows.Clear();
+                linkEndstationOnMaps.Show();
+                dataGridConnections.DataSource = null;
+                dataGridConnections.Rows.Clear();
+
             }
             else
             {
@@ -185,8 +197,8 @@ namespace WindowsFormsApplication1
                 txtStart.Text = "";
                 txtDestination.Hide();
                 lblDestination.Hide();
-                //der Button "Endstation auf Maps" nicht mehr anzeigen.
-                btnMapsTo.Hide();
+                //das Linklabel "Endstation auf Maps" nicht mehr anzeigen.
+                linkEndstationOnMaps.Hide();
 
                 this.dataGridConnections.DataSource = null;
                 this.dataGridConnections.Rows.Clear();
@@ -201,22 +213,43 @@ namespace WindowsFormsApplication1
         }
 
         //--------A006--------
-        //Eingegebene Station per Buttonclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
-        private void btnMaps_Click(object sender, EventArgs e)
+        //Eingegebene Station per Linkclick auf Google Maps anzeigen lassen (mit ShowOnMaps-Funktion)
+        private void StartstationOnMaps_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string fromStation = txtStart.Text.ToString();
             ShowOnMaps(fromStation);
         }
 
-        private void btnMapsTo_Click(object sender, EventArgs e)
+        private void EndstationOnMaps_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string toStation = txtDestination.Text.ToString();
-            ShowOnMaps(toStation);         
+            ShowOnMaps(toStation);
         }
 
+        //--------A008--------
         private void SendviaMail_Click(object sender, EventArgs e)
         {
-            frmSendMail SendMailForm = new frmSendMail();
+            StringBuilder mailBody = new StringBuilder();
+
+            mailBody.Append("<table style='width: 35%;'>");
+            foreach (DataGridViewColumn column in dataGridConnections.Columns)
+            {
+                mailBody.AppendFormat("<th>" + column.HeaderText  + "</th>");
+            }
+
+                foreach (DataGridViewRow row in dataGridConnections.Rows)
+                {
+                    mailBody.Append("<tr>");
+                    foreach(DataGridViewCell cell in row.Cells)
+                    {
+                        mailBody.AppendFormat("<td>" + cell.Value  + "</td>");
+                    }
+                mailBody.Append("</tr>");
+                }
+            mailBody.Append("</table>");
+
+
+            frmSendMail SendMailForm = new frmSendMail(mailBody.ToString());
             SendMailForm.ShowDialog();
         }
 
@@ -263,7 +296,6 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Bitte geben Sie eine Station ein.");
             }
         }
-
         #endregion
     }
 }

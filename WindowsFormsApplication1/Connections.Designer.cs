@@ -39,8 +39,6 @@
             this.rbConnections = new System.Windows.Forms.RadioButton();
             this.rbStationBoard = new System.Windows.Forms.RadioButton();
             this.lblTitel = new System.Windows.Forms.Label();
-            this.btnMapsFrom = new System.Windows.Forms.Button();
-            this.btnMapsTo = new System.Windows.Forms.Button();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.lblDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,6 +46,8 @@
             this.btnSendviaMail = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.linkStartstationOnMaps = new System.Windows.Forms.LinkLabel();
+            this.linkEndstationOnMaps = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConnections)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -140,7 +140,7 @@
             this.rbConnections.AutoSize = true;
             this.rbConnections.Checked = true;
             this.rbConnections.Location = new System.Drawing.Point(9, 66);
-            this.rbConnections.Margin = new System.Windows.Forms.Padding(2);
+            this.rbConnections.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbConnections.Name = "rbConnections";
             this.rbConnections.Size = new System.Drawing.Size(142, 17);
             this.rbConnections.TabIndex = 8;
@@ -153,7 +153,7 @@
             // 
             this.rbStationBoard.AutoSize = true;
             this.rbStationBoard.Location = new System.Drawing.Point(9, 106);
-            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2);
+            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbStationBoard.Name = "rbStationBoard";
             this.rbStationBoard.Size = new System.Drawing.Size(84, 17);
             this.rbStationBoard.TabIndex = 9;
@@ -170,28 +170,6 @@
             this.lblTitel.Size = new System.Drawing.Size(155, 32);
             this.lblTitel.TabIndex = 15;
             this.lblTitel.Text = "SwissTransport";
-            // 
-            // btnMapsFrom
-            // 
-            this.btnMapsFrom.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnMapsFrom.Location = new System.Drawing.Point(595, 24);
-            this.btnMapsFrom.Name = "btnMapsFrom";
-            this.btnMapsFrom.Size = new System.Drawing.Size(121, 23);
-            this.btnMapsFrom.TabIndex = 6;
-            this.btnMapsFrom.Text = "Startstation auf Maps";
-            this.btnMapsFrom.UseVisualStyleBackColor = false;
-            this.btnMapsFrom.Click += new System.EventHandler(this.btnMaps_Click);
-            // 
-            // btnMapsTo
-            // 
-            this.btnMapsTo.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnMapsTo.Location = new System.Drawing.Point(595, 72);
-            this.btnMapsTo.Name = "btnMapsTo";
-            this.btnMapsTo.Size = new System.Drawing.Size(121, 23);
-            this.btnMapsTo.TabIndex = 7;
-            this.btnMapsTo.Text = "Endstation auf Maps";
-            this.btnMapsTo.UseVisualStyleBackColor = false;
-            this.btnMapsTo.Click += new System.EventHandler(this.btnMapsTo_Click);
             // 
             // dtpDate
             // 
@@ -244,6 +222,7 @@
             // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 484);
@@ -256,8 +235,29 @@
             // 
             this.toolStripLabel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.toolStripLabel.Name = "toolStripLabel";
-            this.toolStripLabel.Size = new System.Drawing.Size(13, 17);
-            this.toolStripLabel.Text = "  ";
+            this.toolStripLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // linkStartstationOnMaps
+            // 
+            this.linkStartstationOnMaps.AutoSize = true;
+            this.linkStartstationOnMaps.Location = new System.Drawing.Point(595, 34);
+            this.linkStartstationOnMaps.Name = "linkStartstationOnMaps";
+            this.linkStartstationOnMaps.Size = new System.Drawing.Size(107, 13);
+            this.linkStartstationOnMaps.TabIndex = 25;
+            this.linkStartstationOnMaps.TabStop = true;
+            this.linkStartstationOnMaps.Text = "Startstation auf Maps";
+            this.linkStartstationOnMaps.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.StartstationOnMaps_Click);
+            // 
+            // linkEndstationOnMaps
+            // 
+            this.linkEndstationOnMaps.AutoSize = true;
+            this.linkEndstationOnMaps.Location = new System.Drawing.Point(595, 79);
+            this.linkEndstationOnMaps.Name = "linkEndstationOnMaps";
+            this.linkEndstationOnMaps.Size = new System.Drawing.Size(104, 13);
+            this.linkEndstationOnMaps.TabIndex = 26;
+            this.linkEndstationOnMaps.TabStop = true;
+            this.linkEndstationOnMaps.Text = "Endstation auf Maps";
+            this.linkEndstationOnMaps.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.EndstationOnMaps_Click);
             // 
             // frmConnections
             // 
@@ -265,14 +265,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(740, 506);
+            this.Controls.Add(this.linkEndstationOnMaps);
+            this.Controls.Add(this.linkStartstationOnMaps);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.btnSendviaMail);
             this.Controls.Add(this.dtpTime);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.dtpDate);
-            this.Controls.Add(this.btnMapsTo);
-            this.Controls.Add(this.btnMapsFrom);
             this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.rbStationBoard);
             this.Controls.Add(this.rbConnections);
@@ -308,8 +308,6 @@
         private System.Windows.Forms.RadioButton rbStationBoard;
         public System.Windows.Forms.RadioButton rbConnections;
         private System.Windows.Forms.Label lblTitel;
-        private System.Windows.Forms.Button btnMapsFrom;
-        private System.Windows.Forms.Button btnMapsTo;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label label1;
@@ -317,6 +315,8 @@
         private System.Windows.Forms.Button btnSendviaMail;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripLabel;
+        private System.Windows.Forms.LinkLabel linkStartstationOnMaps;
+        private System.Windows.Forms.LinkLabel linkEndstationOnMaps;
     }
 }
 

@@ -8,14 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using WindowsFormsApplication1;
 
 namespace SwissTransportTimeTable
 {
     public partial class frmSendMail : Form
     {
-        public frmSendMail()
+
+        string SendConnections;
+        public frmSendMail(string Connections)
         {
             InitializeComponent();
+            SendConnections = Connections;
         }
 
         private void SendMail_Load(object sender, EventArgs e)
@@ -26,6 +30,7 @@ namespace SwissTransportTimeTable
 
         private void SendMail_Click(object sender, EventArgs e)
         {
+            
             string From = txtFrom.Text;
             string Password = txtPassword.Text;
             string To = txtTo.Text;
@@ -39,11 +44,17 @@ namespace SwissTransportTimeTable
                 mail.From = new MailAddress(From);
                 mail.To.Add(To);
                 mail.Subject = Subject;
-                mail.Body = Message;
 
+                mail.IsBodyHtml = true;
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential(From, Password);
                 SmtpServer.EnableSsl = true;
+                
+                mail.Body = Message + "\r\n" + "\r\n";
+                foreach(var connection in SendConnections)
+                {
+                    mail.Body = mail.Body + connection;
+                }
 
                 SmtpServer.Send(mail);
                 MessageBox.Show("Mail wurde versendet.");
@@ -51,7 +62,7 @@ namespace SwissTransportTimeTable
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Die Mail konnte nicht versendet werden." + ex);
             }
         }
     }

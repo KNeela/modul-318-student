@@ -96,6 +96,7 @@
             this.txtMessage.Location = new System.Drawing.Point(16, 198);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
+            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMessage.Size = new System.Drawing.Size(237, 107);
             this.txtMessage.TabIndex = 5;
             // 

@@ -106,7 +106,7 @@
             this.btnClose.Location = new System.Drawing.Point(595, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(114, 23);
-            this.btnClose.TabIndex = 10;
+            this.btnClose.TabIndex = 11;
             this.btnClose.Text = "Schliessen";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -140,10 +140,10 @@
             this.rbConnections.AutoSize = true;
             this.rbConnections.Checked = true;
             this.rbConnections.Location = new System.Drawing.Point(9, 66);
-            this.rbConnections.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbConnections.Margin = new System.Windows.Forms.Padding(2);
             this.rbConnections.Name = "rbConnections";
             this.rbConnections.Size = new System.Drawing.Size(142, 17);
-            this.rbConnections.TabIndex = 8;
+            this.rbConnections.TabIndex = 9;
             this.rbConnections.TabStop = true;
             this.rbConnections.Text = "Verbindungen Von-Nach";
             this.rbConnections.UseVisualStyleBackColor = true;
@@ -153,10 +153,10 @@
             // 
             this.rbStationBoard.AutoSize = true;
             this.rbStationBoard.Location = new System.Drawing.Point(9, 106);
-            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbStationBoard.Margin = new System.Windows.Forms.Padding(2);
             this.rbStationBoard.Name = "rbStationBoard";
             this.rbStationBoard.Size = new System.Drawing.Size(84, 17);
-            this.rbStationBoard.TabIndex = 9;
+            this.rbStationBoard.TabIndex = 10;
             this.rbStationBoard.Text = "Abfahrtstafel";
             this.rbStationBoard.UseVisualStyleBackColor = true;
             // 
@@ -215,7 +215,7 @@
             this.btnSendviaMail.Location = new System.Drawing.Point(526, 221);
             this.btnSendviaMail.Name = "btnSendviaMail";
             this.btnSendviaMail.Size = new System.Drawing.Size(111, 23);
-            this.btnSendviaMail.TabIndex = 23;
+            this.btnSendviaMail.TabIndex = 6;
             this.btnSendviaMail.Text = "via Mail weiterleiten";
             this.btnSendviaMail.UseVisualStyleBackColor = false;
             this.btnSendviaMail.Click += new System.EventHandler(this.SendviaMail_Click);
@@ -243,7 +243,7 @@
             this.linkStartstationOnMaps.Location = new System.Drawing.Point(595, 34);
             this.linkStartstationOnMaps.Name = "linkStartstationOnMaps";
             this.linkStartstationOnMaps.Size = new System.Drawing.Size(107, 13);
-            this.linkStartstationOnMaps.TabIndex = 25;
+            this.linkStartstationOnMaps.TabIndex = 7;
             this.linkStartstationOnMaps.TabStop = true;
             this.linkStartstationOnMaps.Text = "Startstation auf Maps";
             this.linkStartstationOnMaps.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.StartstationOnMaps_Click);
@@ -254,7 +254,7 @@
             this.linkEndstationOnMaps.Location = new System.Drawing.Point(595, 79);
             this.linkEndstationOnMaps.Name = "linkEndstationOnMaps";
             this.linkEndstationOnMaps.Size = new System.Drawing.Size(104, 13);
-            this.linkEndstationOnMaps.TabIndex = 26;
+            this.linkEndstationOnMaps.TabIndex = 8;
             this.linkEndstationOnMaps.TabStop = true;
             this.linkEndstationOnMaps.Text = "Endstation auf Maps";
             this.linkEndstationOnMaps.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.EndstationOnMaps_Click);

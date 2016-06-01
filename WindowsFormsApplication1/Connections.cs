@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace WindowsFormsApplication1
+namespace SwissTransportApplication
 {
     public partial class frmConnections : Form
     {
@@ -39,11 +39,12 @@ namespace WindowsFormsApplication1
 
             //--------A001--------
             //Validierung: Prüfen ob eingegebene Stationen gültig sind.
-            if (string.IsNullOrEmpty(fromStation) && string.IsNullOrEmpty(toStation) && rbConnections.Checked== true)
+            if (string.IsNullOrEmpty(fromStation) && string.IsNullOrEmpty(toStation) && rbConnections.Checked == true)
             {
                 isValid = false;
-                MessageBox.Show("Es wurden keine Stationen eingegeben.");              
+                MessageBox.Show("Es wurden keine Stationen eingegeben.");
             }
+
             if (isValid)
             {
                 if (string.IsNullOrEmpty(fromStation))
@@ -52,7 +53,7 @@ namespace WindowsFormsApplication1
                     isValid = false;
                     MessageBox.Show("Die Startstation ist ungültig.");
                 }
-            }
+            }   
 
             if (isValid)
             {
@@ -61,6 +62,15 @@ namespace WindowsFormsApplication1
                     
                     isValid = false;
                     MessageBox.Show("Die Endstation ist ungültig.");
+                }
+            }
+
+            if(isValid)
+            {
+                if(fromStation == toStation)
+                {
+                    isValid = false;
+                    MessageBox.Show("Geben sie zwei unterschiedliche Stationen ein.");
                 }
             }
 
@@ -95,8 +105,7 @@ namespace WindowsFormsApplication1
                     dt.Columns.Add(new DataColumn("Abfahrtszeit/" + Environment.NewLine + "Ankunftszeit"));
                     dt.Columns.Add(new DataColumn("Dauer"));
 
-                    
-                    
+
                     //--------A005--------
                     //Bei der Klasse Transport.cs GetConnectionsbyDateTime-Funktion hinzugefügt.
                     //Diese Funktion macht dasselbe wie GetConnections, nur benötigt sie als Parameter zusätlich noch Datum und Zeit.

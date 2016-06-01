@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
-using WindowsFormsApplication1;
+using SwissTransportApplication;
 
 namespace SwissTransportTimeTable
 {
